@@ -126,24 +126,7 @@
         </field>
     </record>
 
-    <!-- HR employee for -->
-    <record id="view_hr_employee_inherit" model="ir.ui.view">
-        <field name="name">view.hr.employee.inherit</field>
-        <field name="model">hr.employee</field>
-        <field name="inherit_id" ref="hr.view_employee_form"/>
-        <field name="arch" type="xml">
-            <xpath expr="//field[@name='mobile_phone']" position="before">
-                <field name="emp_code"/>
-            </xpath>
-            <xpath expr="//field[@name='passport_id']" position="before">
-                <field name="name_on_passport"/>
-            </xpath>
-            <xpath expr="//field[@name='passport_id']" position="after">
-                <field name="dl_no"/>
-                <field name="pan_no"/>
-            </xpath>
-        </field>
-    </record>
+
 
     <!-- changing default domain of My Expenses(my reimbursement) to Report menu items action in hr.expenses
     also changes action menu default names -->

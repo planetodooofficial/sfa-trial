@@ -97,11 +97,3 @@ class TravelRequisitionExpense(models.Model):
         _inherit = 'product.product'
 
         travel_requisition = fields.Boolean('Travel Requisitions')
-
-    class HrEmployeeInherit(models.Model):
-        _inherit = 'hr.employee'
-
-        emp_code = fields.Char(string='Employee Code')
-        name_on_passport = fields.Char(string='Name on Passport')
-        dl_no = fields.Char(string="Driving License Number")
-        pan_no = fields.Char(string='Pan Card Number')
