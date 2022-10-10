@@ -23,11 +23,13 @@ class HrEmployeeInherit(models.Model):
     emp_category = fields.Char(string="Category")
     confirm_date = fields.Date(string="Confirmation Date")
 
+    personal_email = fields.Char(string="Personal Email ID")
+
     new_aadhar_no = fields.Char(string="Aadhar Card No.")
     new_pf_account_no = fields.Char(string="PF Account No.")
 
     pre_exp = fields.Char(string="Previous Experience")
-    emp_vis = fields.Selection([('per', 'Permanent'), ('cont', 'Contract')], string="Employee Visibility")
+    emp_vis = fields.Char(string="Employee Visibility")
     emp_status = fields.Selection([('active', 'Active'), ('inactive', 'Inactive')], string="Status")
 
     cur_add = fields.Text(string="Current Address", store=True)

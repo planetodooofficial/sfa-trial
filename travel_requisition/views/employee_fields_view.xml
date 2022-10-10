@@ -65,6 +65,7 @@
 
                     <group>
                         <group string="Basic Detail">
+                            <field name="personal_email"/>
                             <field name="pre_exp"/>
                             <field name="emp_vis"/>
                             <field name="emp_status" widget="radio"/>
