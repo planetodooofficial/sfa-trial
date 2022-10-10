@@ -25,13 +25,101 @@
             </xpath>
             <xpath expr="//field[@name='passport_id']" position="after">
                 <field name="dl_no"/>
-                <field name="pan_no"/>
             </xpath>
             <xpath expr="//field[@name='name']" position="before">
                 <field name="title" style="width:50px;"/>
             </xpath>
             <xpath expr="//field[@name='birthday']" position="after">
                 <field name="age"/>
+            </xpath>
+            <xpath expr="//field[@name='certificate']" position="after">
+                <field name="qualification"/>
+            </xpath>
+            <xpath expr="//field[@name='lang']" position="after">
+                <field name="emp_city"/>
+                <field name="emp_state_id"/>
+                <field name="emp_country_id"/>
+            </xpath>
+            <xpath expr="//field[@name='department_id']" position="before">
+                <field name="emp_category"/>
+            </xpath>
+
+            <xpath expr="//field[@name='joining_date']" position="after">
+                <field name="confirm_date"/>
+            </xpath>
+
+            <xpath expr="//form/sheet/notebook/page[@name='hr_settings']" position="before">
+                <page name="Other Details" string="Other Details">
+                    <group>
+                        <group string="Home Address">
+                            <field name="cur_add" force-save="1"/>
+                            <label for="cur_same_per" style="width:280px;"/>
+                            <field name="cur_same_per" nolabel="1"/>
+                            <field name="per_add"/>
+                        </group>
+                        <group string="Document Details">
+                            <field name="new_aadhar_no"/>
+                            <field name="new_pf_account_no"/>
+                        </group>
+                    </group>
+
+                    <group>
+                        <group string="Basic Detail">
+                            <field name="pre_exp"/>
+                            <field name="emp_vis"/>
+                            <field name="emp_status" widget="radio"/>
+                        </group>
+                        <group string="Bank Details">
+                            <field name="bank_name"/>
+                            <field name="bank_no"/>
+                            <field name="bank_ifsc"/>
+                        </group>
+                    </group>
+
+                    <group>
+                        <group string="Employee Level" class="col-lg-4">
+                            <field name="designation"/>
+                            <field name="grade"/>
+                            <field name="cadre"/>
+                            <field name="grade_title"/>
+                            <field name="sub_designation"/>
+                        </group>
+                        <group string="Joining Details" class="col-lg-4">
+                            <field name="emp_join_source"/>
+                            <field name="sub_source"/>
+                        </group>
+                        <group string="Resignation Details" class="col-lg-4">
+                            <field name="date_of_resignation"/>
+                            <field name="dol"/>
+                            <field name="va_iv"/>
+                            <field name="reason_for_leave"/>
+                        </group>
+                    </group>
+
+                    <group string="Salary Details">
+                        <group>
+                            <field name="tenure"/>
+                            <field name="tenure_detail"/>
+                            <field name="basic_sal"/>
+                            <field name="hra"/>
+                            <field name="convy"/>
+                            <field name="lta"/>
+                            <field name="choice_pay"/>
+                            <field name="special_allow"/>
+                        </group>
+                        <group>
+                            <field name="gross_per_month"/>
+                            <field name="gross_per_annum"/>
+                            <field name="pf_fund_no"/>
+                            <field name="gratuity"/>
+                            <field name="total_retiral"/>
+                            <field name="annual_retiral"/>
+                            <field name="fixed_total_ctc"/>
+                            <field name="pb"/>
+                            <field name="total_ctc"/>
+                        </group>
+                    </group>
+                </page>
             </xpath>
         </field>
     </record>

@@ -65,7 +65,7 @@
                             <group>
                                 <separator string="In Case of Train Booking"
                                            style="color:#7d435d; font-size:18px; font-weight:bold"/>
-                                <field name="pan_dl_no"/>
+                                <field name="pan_no_new"/>
                                 <field name="dl_number"/>
                                 <field name="age"/>
                             </group>
