@@ -71,7 +71,7 @@
                         </group>
                         <group string="Bank Details">
                             <field name="bank_name"/>
-                            <field name="bank_no"/>
+                            <field name="bank_account_id"/>
                             <field name="bank_ifsc"/>
                         </group>
                     </group>

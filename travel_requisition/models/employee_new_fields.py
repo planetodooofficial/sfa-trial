@@ -35,7 +35,12 @@ class HrEmployeeInherit(models.Model):
     cur_same_per = fields.Boolean(string="Permanent Address is same as Current Address")
 
     bank_name = fields.Char(string="Bank Name")
-    bank_no = fields.Char(string="Bank Account Number")
+    bank_account_id = fields.Many2one(
+        'res.partner.bank', 'Bank Account Number',
+        domain="[('partner_id', '=', address_home_id), '|', ('company_id', '=', False), ('company_id', '=', company_id)]",
+        groups="hr.group_hr_user",
+        tracking=True,
+        help='Employee bank salary account')
     bank_ifsc = fields.Char(string="Bank IFSC Code")
 
     designation = fields.Char(string='Designation')
