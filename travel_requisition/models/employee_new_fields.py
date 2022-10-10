@@ -11,7 +11,7 @@ class HrEmployeeInherit(models.Model):
     name_on_passport = fields.Char(string='Name on Passport')
     dl_no = fields.Char(string="Driving License Number")
     title = fields.Selection([('mr', 'Mr.'), ('ms', 'Ms.'), ('mrs', 'Mrs.')], string='Title')
-    age = fields.Char(string="Age", compute="_compute_age")
+    age = fields.Char(string="Age", compute="_compute_age", readonly=False)
     qualification = fields.Char(string="Qualification")
     emp_city = fields.Char(related='address_home_id.city', string="City", readonly=False,
                            related_sudo=False)
@@ -87,11 +87,11 @@ class HrEmployeeInherit(models.Model):
         return res
 
     # function for calculate age based on birthdate
-    @api.depends('birthday')
-    def _compute_age(self):
-        for emp in self:
-            age = relativedelta(datetime.now().date(), fields.Datetime.from_string(emp.birthday)).years
-            emp.age = str(age) + " Years"
+    # @api.depends('birthday')
+    # def _compute_age(self):
+    #     for emp in self:
+    #         age = relativedelta(datetime.now().date(), fields.Datetime.from_string(emp.birthday)).years
+    #         emp.age = str(age) + " Years"
 
     @api.onchange('cur_same_per')
     def _compute_address(self):
