@@ -8,7 +8,7 @@ class HrEmployeeInherit(models.Model):
 
     # overried field for adding options
     marital = fields.Selection([
-        ('unmarried', 'Un-Married'),
+        ('single', 'Single'),
         ('married', 'Married'),
         ('cohabitant', 'Legal Cohabitant'),
         ('widower', 'Widower'),
