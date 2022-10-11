@@ -16,20 +16,17 @@ class HrEmployeeInherit(models.Model):
         ('na', 'NA')
     ], string='Marital Status', groups="hr.group_hr_user", default='single', tracking=True)
 
-    emp_code = fields.Char(string='Employee Code', required=True, copy=False, readonly=True, index=True,
+    emp_code = fields.Char(string='Employee Code', required=True, copy=False, readonly=False, index=True,
                            default=lambda self: _('New'))
     name_on_passport = fields.Char(string='Name on Passport')
     dl_no = fields.Char(string="Driving License Number")
     title = fields.Selection([('mr', 'Mr.'), ('ms', 'Ms.'), ('mrs', 'Mrs.')], string='Title')
     age = fields.Char(string="Age", readonly=False)
     qualification = fields.Char(string="Qualification")
-    emp_city = fields.Char(related='address_home_id.city', string="City", readonly=False,
-                           related_sudo=False)
-    emp_state_id = fields.Many2one(
-        related='address_home_id.state_id', string="State", readonly=False, related_sudo=False,
-        domain="[('country_id', '=?', emp_country_id)]")
-    emp_country_id = fields.Many2one(related='address_home_id.country_id', string="Country", readonly=False,
-                                     related_sudo=False)
+
+    emp_city = fields.Char(string="City")
+    emp_state_id = fields.Char(string="State")
+
     emp_category = fields.Char(string="Category")
     confirm_date = fields.Date(string="Confirmation Date")
 
@@ -88,13 +85,13 @@ class HrEmployeeInherit(models.Model):
     total_ctc = fields.Float(string="Total CTC")
 
     # Overriding the create method and assigning the sequence for the record
-    @api.model
-    def create(self, vals):
-        if vals.get('emp_code', _('New')) == _('New'):
-            vals['emp_code'] = self.env['ir.sequence'].next_by_code(
-                'hr.employee') or _('New')
-        res = super(HrEmployeeInherit, self).create(vals)
-        return res
+    # @api.model
+    # def create(self, vals):
+    #     if vals.get('emp_code', _('New')) == _('New'):
+    #         vals['emp_code'] = self.env['ir.sequence'].next_by_code(
+    #             'hr.employee') or _('New')
+    #     res = super(HrEmployeeInherit, self).create(vals)
+    #     return res
 
     # function for calculate age based on birthdate
     # @api.depends('birthday')
