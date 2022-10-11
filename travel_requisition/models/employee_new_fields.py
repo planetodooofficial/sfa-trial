@@ -85,13 +85,13 @@ class HrEmployeeInherit(models.Model):
     total_ctc = fields.Float(string="Total CTC")
 
     # Overriding the create method and assigning the sequence for the record
-    # @api.model
-    # def create(self, vals):
-    #     if vals.get('emp_code', _('New')) == _('New'):
-    #         vals['emp_code'] = self.env['ir.sequence'].next_by_code(
-    #             'hr.employee') or _('New')
-    #     res = super(HrEmployeeInherit, self).create(vals)
-    #     return res
+    @api.model
+    def create(self, vals):
+        if vals.get('emp_code', _('New')) == _('New'):
+            vals['emp_code'] = self.env['ir.sequence'].next_by_code(
+                'hr.employee') or _('New')
+        res = super(HrEmployeeInherit, self).create(vals)
+        return res
 
     # function for calculate age based on birthdate
     # @api.depends('birthday')
