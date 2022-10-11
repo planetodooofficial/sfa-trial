@@ -27,7 +27,7 @@
                 <field name="dl_no"/>
             </xpath>
             <xpath expr="//field[@name='name']" position="before">
-                <field name="title" style="width:50px;"/>
+                <field name="title" style="width:60px;"/>
             </xpath>
             <xpath expr="//field[@name='birthday']" position="after">
                 <field name="age"/>
@@ -52,7 +52,7 @@
                     <group>
                         <group string="Home Address">
                             <field name="cur_add" force-save="1"/>
-                            <label for="cur_same_per" style="width:280px;"/>
+                            <label for="cur_same_per"/>
                             <field name="cur_same_per" nolabel="1"/>
                             <field name="per_add"/>
                         </group>
