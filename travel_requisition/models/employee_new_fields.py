@@ -21,7 +21,7 @@ class HrEmployeeInherit(models.Model):
     name_on_passport = fields.Char(string='Name on Passport')
     dl_no = fields.Char(string="Driving License Number")
     title = fields.Selection([('mr', 'Mr.'), ('ms', 'Ms.'), ('mrs', 'Mrs.')], string='Title')
-    age = fields.Char(string="Age", compute="_compute_age", readonly=False)
+    age = fields.Char(string="Age", readonly=False)
     qualification = fields.Char(string="Qualification")
     emp_city = fields.Char(related='address_home_id.city', string="City", readonly=False,
                            related_sudo=False)
