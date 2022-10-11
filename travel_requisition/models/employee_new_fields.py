@@ -6,6 +6,16 @@ from dateutil.relativedelta import relativedelta
 class HrEmployeeInherit(models.Model):
     _inherit = 'hr.employee'
 
+    # overried field for adding options
+    marital = fields.Selection([
+        ('unmarried', 'Un-Married'),
+        ('married', 'Married'),
+        ('cohabitant', 'Legal Cohabitant'),
+        ('widower', 'Widower'),
+        ('divorced', 'Divorced'),
+        ('na', 'NA')
+    ], string='Marital Status', groups="hr.group_hr_user", default='single', tracking=True)
+
     emp_code = fields.Char(string='Employee Code', required=True, copy=False, readonly=True, index=True,
                            default=lambda self: _('New'))
     name_on_passport = fields.Char(string='Name on Passport')
