@@ -16,7 +16,7 @@ class HrEmployeeInherit(models.Model):
         ('na', 'NA')
     ], string='Marital Status', groups="hr.group_hr_user", default='single', tracking=True)
 
-    emp_code = fields.Char(string='Employee Code', required=True, copy=False, readonly=False, index=True,
+    emp_code = fields.Char(string='Employee Code', required=True, copy=False, readonly=True, index=True,
                            default=lambda self: _('New'))
     name_on_passport = fields.Char(string='Name on Passport')
     dl_no = fields.Char(string="Driving License Number")
