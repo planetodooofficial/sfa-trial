@@ -131,24 +131,24 @@
         </field>
     </record>
 
-    <record id="view_hr_contract_history_inherit" model="ir.ui.view">
-        <field name="name">view.hr.contract.history.inherit</field>
-        <field name="model">hr.contract.history</field>
-        <field name="inherit_id" ref="hr_contract.hr_contract_history_view_form"/>
-        <field name="arch" type="xml">
-            <xpath expr="//field[@name='job_id']" position="after">
-                <field name="total_cost_to_comp"/>
-            </xpath>
-            <xpath expr="//field[@name='reference_monthly_wage']" position="after">
-                <field name="is_variable"/>
-                <field name="variable_per"/>
-            </xpath>
-            <field name="reference_yearly_cost" position="attributes">
-                <attribute name="string">Fixed yearly CTC</attribute>
-            </field>
-            <field name="reference_monthly_cost" position="attributes">
-                <attribute name="string">Fixed monthly CTC</attribute>
-            </field>
-        </field>
-    </record>
+<!--    <record id="view_hr_contract_history_inherit" model="ir.ui.view">-->
+<!--        <field name="name">view.hr.contract.history.inherit</field>-->
+<!--        <field name="model">hr.contract.history</field>-->
+<!--        <field name="inherit_id" ref="hr_contract.hr_contract_history_view_form"/>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <xpath expr="//field[@name='job_id']" position="after">-->
+<!--                <field name="total_cost_to_comp"/>-->
+<!--            </xpath>-->
+<!--            <xpath expr="//field[@name='reference_monthly_wage']" position="after">-->
+<!--                <field name="is_variable"/>-->
+<!--                <field name="variable_per"/>-->
+<!--            </xpath>-->
+<!--            <field name="reference_yearly_cost" position="attributes">-->
+<!--                <attribute name="string">Fixed yearly CTC</attribute>-->
+<!--            </field>-->
+<!--            <field name="reference_monthly_cost" position="attributes">-->
+<!--                <attribute name="string">Fixed monthly CTC</attribute>-->
+<!--            </field>-->
+<!--        </field>-->
+<!--    </record>-->
 </odoo>

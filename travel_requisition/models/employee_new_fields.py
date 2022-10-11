@@ -106,9 +106,9 @@ class HrEmployeeInherit(models.Model):
             self.per_add = self.cur_add
 
 
-class HrContractHistoryInherit(models.Model):
-    _inherit = 'hr.contract.history'
-
-    total_cost_to_comp = fields.Integer(string="Total cost to Company")
-    is_variable = fields.Binary(string="Is Variable")
-    variable_per = fields.Float(string="Variable %")
+# class HrContractHistoryInherit(models.Model):
+#     _inherit = 'hr.contract.history'
+#
+#     total_cost_to_comp = fields.Integer(string="Total cost to Company")
+#     is_variable = fields.Binary(string="Is Variable")
+#     variable_per = fields.Float(string="Variable %")
