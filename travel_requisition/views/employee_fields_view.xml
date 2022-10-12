@@ -136,29 +136,47 @@
         </field>
     </record>
 
-        <record id="view_hr_cont_inherit" model="ir.ui.view">
-            <field name="name">view.hr.cont.inherit</field>
-            <field name="model">hr.contract</field>
-            <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
-            <field name="arch" type="xml">
-                <xpath expr="//group[@name='salary']" position="after">
-                    <group>
-                        <field name="total_cost_to_comp"/>
-                        <field name="lta"/>
-                        <field name="basic"/>
-                        <field name="conveyance"/>
-                        <field name="choice_pay"/>
-                    </group>
-                </xpath>
-                <xpath expr="//field[@name='hr_responsible_id']" position="after">
-                    <field name="date_of_leaving"/>
-                </xpath>
-                <field name="date_start" position="attributes">
-                    <attribute name="string">Date of Joining</attribute>
-                </field>
-                <field name="date_end" position="attributes">
-                    <attribute name="string">Tenure</attribute>
-                </field>
+    <record id="view_hr_cont_inherit" model="ir.ui.view">
+        <field name="name">view.hr.cont.inherit</field>
+        <field name="model">hr.contract</field>
+        <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='salary']" position="after">
+                <group>
+                    <field name="total_cost_to_comp"/>
+                    <field name="lta"/>
+                    <field name="basic"/>
+                    <field name="conveyance"/>
+                    <field name="choice_pay"/>
+                </group>
+            </xpath>
+            <xpath expr="//field[@name='hr_responsible_id']" position="after">
+                <field name="date_of_leaving"/>
+            </xpath>
+            <field name="date_start" position="attributes">
+                <attribute name="string">Date of Joining</attribute>
             </field>
-        </record>
+            <field name="date_end" position="attributes">
+                <attribute name="string">Tenure</attribute>
+            </field>
+        </field>
+    </record>
+
+    <!-- hide and remove required from Contract Detail Notebook page  2 fields -->
+    <record id="view_hr_cont_sal_inherit" model="ir.ui.view">
+        <field name="name">view.hr.cont.sal.inherit</field>
+        <field name="model">hr.contract</field>
+        <field name="inherit_id" ref="hr_contract_salary.hr_contract_view_form"/>
+        <field name="arch" type="xml">
+            <field name="sign_template_id" position="attributes">
+                <attribute name="required">False</attribute>
+                <attribute name="invisible">True</attribute>
+            </field>
+            <field name="contract_update_template_id" position="attributes">
+                <attribute name="required">False</attribute>
+                <attribute name="invisible">True</attribute>
+            </field>
+        </field>
+    </record>
+
 </odoo>
