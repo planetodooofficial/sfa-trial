@@ -5,7 +5,7 @@
     'sequence': 10,
     'description': """Travel Requisition Expense""",
     'depends': [
-        'base', 'hr_expense', 'product', 'website', 'portal', 'hr', 'hr_contract',
+        'base', 'hr_expense', 'product', 'website', 'portal', 'hr',
     ],
     'data': [
         'security/ir.model.access.csv',

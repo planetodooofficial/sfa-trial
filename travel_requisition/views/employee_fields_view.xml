@@ -49,6 +49,11 @@
                 <field name="confirm_date"/>
             </xpath>
 
+            <!-- hide private contact group -->
+            <xpath expr="//form/sheet/notebook/page[@name='personal_information']/group/group" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
             <xpath expr="//form/sheet/notebook/page[@name='hr_settings']" position="before">
                 <page name="Other Details" string="Other Details">
                     <group>
@@ -131,24 +136,29 @@
         </field>
     </record>
 
-<!--    <record id="view_hr_contract_history_inherit" model="ir.ui.view">-->
-<!--        <field name="name">view.hr.contract.history.inherit</field>-->
-<!--        <field name="model">hr.contract.history</field>-->
-<!--        <field name="inherit_id" ref="hr_contract.hr_contract_history_view_form"/>-->
-<!--        <field name="arch" type="xml">-->
-<!--            <xpath expr="//field[@name='job_id']" position="after">-->
-<!--                <field name="total_cost_to_comp"/>-->
-<!--            </xpath>-->
-<!--            <xpath expr="//field[@name='reference_monthly_wage']" position="after">-->
-<!--                <field name="is_variable"/>-->
-<!--                <field name="variable_per"/>-->
-<!--            </xpath>-->
-<!--            <field name="reference_yearly_cost" position="attributes">-->
-<!--                <attribute name="string">Fixed yearly CTC</attribute>-->
-<!--            </field>-->
-<!--            <field name="reference_monthly_cost" position="attributes">-->
-<!--                <attribute name="string">Fixed monthly CTC</attribute>-->
-<!--            </field>-->
-<!--        </field>-->
-<!--    </record>-->
+        <record id="view_hr_cont_inherit" model="ir.ui.view">
+            <field name="name">view.hr.cont.inherit</field>
+            <field name="model">hr.contract</field>
+            <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[@name='salary']" position="after">
+                    <group>
+                        <field name="total_cost_to_comp"/>
+                        <field name="lta"/>
+                        <field name="basic"/>
+                        <field name="conveyance"/>
+                        <field name="choice_pay"/>
+                    </group>
+                </xpath>
+                <xpath expr="//field[@name='hr_responsible_id']" position="after">
+                    <field name="date_of_leaving"/>
+                </xpath>
+                <field name="date_start" position="attributes">
+                    <attribute name="string">Date of Joining</attribute>
+                </field>
+                <field name="date_end" position="attributes">
+                    <attribute name="string">Tenure</attribute>
+                </field>
+            </field>
+        </record>
 </odoo>

@@ -9,8 +9,7 @@
 
             <!-- travel requisition boolean field in form after payment_mode -->
             <xpath expr="//field[@name='payment_mode']" position="after">
-                <label for="travel_requisition_opt"/>
-                <field name="travel_requisition_opt" readonly="1"/>
+                <field name="travel_requisition_opt" readonly="1" invisible="1"/>
             </xpath>
 
             <!-- notebook of travel requisition in form visible on payment_mode = company_account -->
