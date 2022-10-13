@@ -24,9 +24,6 @@ class HrEmployeeInherit(models.Model):
     age = fields.Char(string="Age", readonly=False)
     qualification = fields.Char(string="Qualification")
 
-    emp_city = fields.Char(string="City")
-    emp_state_id = fields.Char(string="State")
-
     emp_category = fields.Char(string="Category")
     confirm_date = fields.Date(string="Confirmation Date")
 
@@ -39,23 +36,24 @@ class HrEmployeeInherit(models.Model):
     emp_vis = fields.Char(string="Employee Visibility")
     emp_status = fields.Selection([('active', 'Active'), ('inactive', 'Inactive')], string="Status")
 
+    # address fields
     cur_add = fields.Text(string="Current Address", store=True)
     per_add = fields.Text(string="Permanent Address", store=True)
     cur_same_per = fields.Boolean(string="Permanent Address is same as Current Address")
+    emp_city = fields.Char(string="City")
+    emp_state_id = fields.Char(string="State")
 
+    # bank fields
     bank_name = fields.Char(string="Bank Name")
-    bank_account_id = fields.Many2one(
-        'res.partner.bank', 'Bank Account Number',
-        domain="[('partner_id', '=', address_home_id), '|', ('company_id', '=', False), ('company_id', '=', company_id)]",
-        groups="hr.group_hr_user",
-        tracking=True,
-        help='Employee bank salary account')
+    bank_accountno = fields.Integer(string="Bank Account Number")
     bank_ifsc = fields.Char(string="Bank IFSC Code")
 
-    designation = fields.Char(string='Designation')
-    grade = fields.Char(string="Grade")
-    cadre = fields.Char(string="Cadre")
-    grade_title = fields.Char(string="Grade Title")
+    # master data fields
+    designation = fields.Many2one('designation.master', 'Designation')
+    grade = fields.Many2one('grade.master', 'Grade')
+    cadre = fields.Many2one('cadre.master', 'Cadre')
+    grade_title = fields.Many2one('grade.title.master', 'Grade Title')
+
     sub_designation = fields.Char(string="Sub Designation")
 
     emp_join_source = fields.Char(string='Employee Joining Source')
@@ -66,6 +64,7 @@ class HrEmployeeInherit(models.Model):
     va_iv = fields.Selection([('va', 'VA'), ('iv', 'IV')], string="VA/IV")
     reason_for_leave = fields.Char(string='Reason For Leaving')
 
+    # salary related fields
     tenure = fields.Float(string="Tenure in SFA")
     tenure_detail = fields.Char(string="Tenure Detail")
     basic_sal = fields.Float(string="Basic Salary")
@@ -115,3 +114,13 @@ class HrContractInherit(models.Model):
     conveyance = fields.Float(string="Conveyance %")
     choice_pay = fields.Float(string="Choice Pay %")
     date_of_leaving = fields.Date(string="Date of Leaving (DOL)")
+    bank_name = fields.Char(string="Bank Name")
+    bank_account_no = fields.Integer(string="Bank Account Number")
+    bank_ifsc = fields.Char(string="Bank IFSC")
+
+    @api.model
+    def create(self, vals):
+        res = super(HrContractInherit, self).create(vals)
+        if res:
+            res.state = 'open'
+        return res
