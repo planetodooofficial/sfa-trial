@@ -109,11 +109,15 @@ class HrContractInherit(models.Model):
     _inherit = 'hr.contract'
 
     total_cost_to_comp = fields.Float(string="Total cost to Company")
-    lta = fields.Float(string="LTA %")
-    basic = fields.Float(string="Basic %")
-    conveyance = fields.Float(string="Conveyance %")
-    choice_pay = fields.Float(string="Choice Pay %")
-    per_bonus = fields.Float(string="Performance Bonus %")
+    lta = fields.Float(string="LTA %", default=8.33)
+    basic = fields.Float(string="Basic %", default=35.00)
+    conveyance = fields.Float(string="Conveyance %", default=5.00)
+    choice_pay = fields.Float(string="Choice Pay %", default=15.00)
+    per_bonus = fields.Float(string="Performance Bonus %", default=10.00)
+    house_rent_allowance_metro_nonmetro = fields.Float(string='House Rent Allowance (%)', digits='Payroll',
+                                                       default=50.00,
+                                                       help='HRA is an allowance given by the employer to the employee for taking care of his rental or accommodation expenses for metro city it is 50% and for non metro 40%. \nHRA computed as percentage(%)')
+
     date_of_leaving = fields.Date(string="Date of Leaving (DOL)")
     bank_name = fields.Char(string="Bank Name")
     bank_account_no = fields.Integer(string="Bank Account Number")
