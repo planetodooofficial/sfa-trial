@@ -49,7 +49,7 @@ class HrEmployeeInherit(models.Model):
     bank_ifsc = fields.Char(string="Bank IFSC Code")
 
     # master data fields
-    designation = fields.Many2one('designation.master', 'Designation')
+    # designation = fields.Many2one('designation.master', 'Designation')
     grade = fields.Many2one('grade.master', 'Grade')
     cadre = fields.Many2one('cadre.master', 'Cadre')
     grade_title = fields.Many2one('grade.title.master', 'Grade Title')

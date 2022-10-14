@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <!-- view for designation master -->
-    <record id="designation_master_tree_view" model="ir.ui.view">
-        <field name="name">designation.master.tree.view</field>
-        <field name="model">designation.master</field>
-        <field name="arch" type="xml">
-            <tree>
-                <field name="designation_value"/>
-            </tree>
-        </field>
-    </record>
-    <record id="designation_master_form_view" model="ir.ui.view">
-        <field name="name">designation.master.form.view</field>
-        <field name="model">designation.master</field>
-        <field name="arch" type="xml">
-            <form>
-                <sheet>
-                    <group>
-                        <field name="designation_value"/>
-                    </group>
-                </sheet>
-            </form>
-        </field>
-    </record>
+    <!--    <record id="designation_master_tree_view" model="ir.ui.view">-->
+    <!--        <field name="name">designation.master.tree.view</field>-->
+    <!--        <field name="model">designation.master</field>-->
+    <!--        <field name="arch" type="xml">-->
+    <!--            <tree>-->
+    <!--                <field name="designation_value"/>-->
+    <!--            </tree>-->
+    <!--        </field>-->
+    <!--    </record>-->
+    <!--    <record id="designation_master_form_view" model="ir.ui.view">-->
+    <!--        <field name="name">designation.master.form.view</field>-->
+    <!--        <field name="model">designation.master</field>-->
+    <!--        <field name="arch" type="xml">-->
+    <!--            <form>-->
+    <!--                <sheet>-->
+    <!--                    <group>-->
+    <!--                        <field name="designation_value"/>-->
+    <!--                    </group>-->
+    <!--                </sheet>-->
+    <!--            </form>-->
+    <!--        </field>-->
+    <!--    </record>-->
 
     <!-- view for grade master -->
     <record id="grade_master_tree_view" model="ir.ui.view">
@@ -97,17 +97,17 @@
     </record>
 
     <!-- action for designation -->
-    <record id="action_designation_master" model="ir.actions.act_window">
-        <field name="name">Designation</field>
-        <field name="type">ir.actions.act_window</field>
-        <field name="res_model">designation.master</field>
-        <field name="view_mode">tree,form</field>
-        <field name="help" type="html">
-            <p class="o_view_nocontent_smiling_face">
-                Create new Designation!
-            </p>
-        </field>
-    </record>
+    <!--    <record id="action_designation_master" model="ir.actions.act_window">-->
+    <!--        <field name="name">Designation</field>-->
+    <!--        <field name="type">ir.actions.act_window</field>-->
+    <!--        <field name="res_model">designation.master</field>-->
+    <!--        <field name="view_mode">tree,form</field>-->
+    <!--        <field name="help" type="html">-->
+    <!--            <p class="o_view_nocontent_smiling_face">-->
+    <!--                Create new Designation!-->
+    <!--            </p>-->
+    <!--        </field>-->
+    <!--    </record>-->
 
     <!-- action for grade -->
     <record id="action_grade_master" model="ir.actions.act_window">
@@ -148,21 +148,25 @@
         </field>
     </record>
 
-    <menuitem id="designation_menu"
-              name="Designation"
-              parent="hr.menu_human_resources_configuration"
-              action="action_designation_master"/>
+    <!-- menu item for designation -->
+    <!--    <menuitem id="designation_menu"-->
+    <!--              name="Designation"-->
+    <!--              parent="hr.menu_human_resources_configuration"-->
+    <!--              action="action_designation_master"/>-->
 
+    <!-- menu item for Grade -->
     <menuitem id="grade_menu"
               name="Grade"
               parent="hr.menu_human_resources_configuration"
               action="action_grade_master"/>
 
+    <!-- menu item for Cadre -->
     <menuitem id="cadre_menu"
               name="Cadre"
               parent="hr.menu_human_resources_configuration"
               action="action_cadre_master"/>
 
+    <!-- menu item for grade title -->
     <menuitem id="grade_title_menu"
               name="Grade Title"
               parent="hr.menu_human_resources_configuration"

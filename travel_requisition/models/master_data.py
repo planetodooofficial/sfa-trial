@@ -1,10 +1,10 @@
 from odoo import models, fields, api, _
 
 
-class DesignationMaster(models.Model):
-    _name = 'designation.master'
-    _rec_name = 'designation_value'
-    designation_value = fields.Char(string='Designation')
+# class DesignationMaster(models.Model):
+#     _name = 'designation.master'
+#     _rec_name = 'designation_value'
+#     designation_value = fields.Char(string='Designation')
 
 
 class GradeMaster(models.Model):

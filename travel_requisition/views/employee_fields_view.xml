@@ -71,9 +71,9 @@
                 <attribute name="invisible">1</attribute>
             </xpath>
 
-            <field name="work_email" position="after">
-                <field name="designation"/>
-            </field>
+            <!--            <field name="work_email" position="after">-->
+            <!--                <field name="designation"/>-->
+            <!--            </field>-->
 
             <field name="work_location_id" position="before">
                 <field name="cadre"/>
