@@ -15,3 +15,19 @@ class SubDepartments(models.Model):
 
     name = fields.Char(string="Name")
     code = fields.Char(string="Code")
+
+
+class LocationCenter(models.Model):
+    _name = 'location.center'
+    _rec_name = 'name'
+
+    name = fields.Char(string="Name")
+    code = fields.Char(string="Code")
+
+
+class ParentHead(models.Model):
+    _name = 'parent.head'
+    _rec_name = 'name'
+
+    name = fields.Char(string="Name")
+    code = fields.Char(string="Code")

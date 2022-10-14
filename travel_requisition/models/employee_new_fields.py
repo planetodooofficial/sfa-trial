@@ -1,5 +1,6 @@
 from odoo import models, fields, api, _
-from datetime import datetime
+import schedule
+from datetime import datetime, time
 from dateutil.relativedelta import relativedelta
 
 
@@ -123,9 +124,45 @@ class HrContractInherit(models.Model):
     bank_account_no = fields.Integer(string="Bank Account Number")
     bank_ifsc = fields.Char(string="Bank IFSC")
 
+    # @api.depends('employee_id')
+    # def _cont_name_format(self, vals):
+    #     emp_rec = self.env['hr.employee'].browse(vals.get('employee_id'))
+    #     cont_ref = []
+    #
+    #     emid = emp_rec.mapped('emp_code')
+    #     eml = len(emid)
+    #     print('emid=', emid)
+    #
+    #     empname = emp_rec.mapped('name')
+    #     namel = len(empname)
+    #     print('empname=', empname)
+    #
+    #     empgrade = emp_rec.mapped('grade.grade_new')
+    #     grl = len(empgrade)
+    #     print('empgrade=', empgrade)
+    #
+    #     cont_ref.append(emid, empname, empgrade)
+    #     print(str(cont_ref))
+
     @api.model
     def create(self, vals):
         res = super(HrContractInherit, self).create(vals)
+
+        emp_rec = self.env['hr.employee'].browse(vals.get('employee_id'))
+        cont_ref = []
+
+        emid = emp_rec.mapped('emp_code')
+        print('emid=', emid.key())
+
+        empname = emp_rec.mapped('name')
+        print('empname=', empname)
+
+        empgrade = emp_rec.mapped('grade.grade_new')
+        print('empgrade=', empgrade)
+
+        # cont_ref.append(emid)
+        # print(str(cont_ref))
+
         if res:
             res.state = 'open'
         return res
