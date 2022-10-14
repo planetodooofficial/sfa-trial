@@ -172,6 +172,7 @@
                     <field name="basic"/>
                     <field name="conveyance"/>
                     <field name="choice_pay"/>
+                    <field name="per_bonus"/>
                 </group>
             </xpath>
             <xpath expr="//field[@name='hr_responsible_id']" position="after">

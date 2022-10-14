@@ -113,6 +113,7 @@ class HrContractInherit(models.Model):
     basic = fields.Float(string="Basic %")
     conveyance = fields.Float(string="Conveyance %")
     choice_pay = fields.Float(string="Choice Pay %")
+    per_bonus = fields.Float(string="Performance Bonus %")
     date_of_leaving = fields.Date(string="Date of Leaving (DOL)")
     bank_name = fields.Char(string="Bank Name")
     bank_account_no = fields.Integer(string="Bank Account Number")
