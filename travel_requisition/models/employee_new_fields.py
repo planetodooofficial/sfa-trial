@@ -51,8 +51,8 @@ class HrEmployeeInherit(models.Model):
     # master data fields
     # designation = fields.Many2one('designation.master', 'Designation')
     grade = fields.Many2one('grade.master', 'Grade')
-    cadre = fields.Many2one('cadre.master', 'Cadre')
-    grade_title = fields.Many2one('grade.title.master', 'Grade Title')
+    cadre = fields.Many2one('cadre.master', 'Cadre', related='grade.cadre_id')
+    grade_title = fields.Many2one('grade.title.master', 'Grade Title', related='grade.grade_title_id')
 
     sub_designation = fields.Char(string="Sub Designation")
 

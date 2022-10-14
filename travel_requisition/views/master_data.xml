@@ -42,6 +42,8 @@
                 <sheet>
                     <group>
                         <field name="grade_new"/>
+                        <field name="cadre_id"/>
+                        <field name="grade_title_id"/>
                     </group>
                 </sheet>
             </form>

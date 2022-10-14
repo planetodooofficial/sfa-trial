@@ -11,15 +11,17 @@ class GradeMaster(models.Model):
     _name = 'grade.master'
     _rec_name = 'grade_new'
     grade_new = fields.Char(string='Grade')
+    cadre_id = fields.Many2one('cadre.master', 'cadre id')
+    grade_title_id = fields.Many2one('grade.title.master', 'grade title id')
 
 
 class CadreMaster(models.Model):
     _name = 'cadre.master'
     _rec_name = 'cadre_new'
-    cadre_new = fields.Char(string='Cadre')
+    cadre_new = fields.Char('Cadre')
 
 
 class GradeTitleMaster(models.Model):
     _name = 'grade.title.master'
     _rec_name = 'grade_title_line'
-    grade_title_line = fields.Char(string='Grade Title')
+    grade_title_line = fields.Char('Grade Title')
