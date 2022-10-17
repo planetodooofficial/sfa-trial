@@ -104,17 +104,7 @@
                             <field name="emp_vis"/>
                             <field name="emp_status" widget="radio"/>
                         </group>
-                        <group string="Bank Details">
-                            <field name="bank_name"/>
-                            <field name="bank_accountno"/>
-                            <field name="bank_ifsc"/>
-                        </group>
-                    </group>
-
-                    <group>
                         <group string="Employee Level">
-
-
                             <field name="sub_designation"/>
                         </group>
                     </group>
@@ -132,29 +122,29 @@
                         </group>
                     </group>
 
-                    <group string="Salary Details">
-                        <group>
-                            <field name="tenure"/>
-                            <field name="tenure_detail"/>
-                            <field name="basic_sal"/>
-                            <field name="hra"/>
-                            <field name="convy"/>
-                            <field name="lta"/>
-                            <field name="choice_pay"/>
-                            <field name="special_allow"/>
-                        </group>
-                        <group>
-                            <field name="gross_per_month"/>
-                            <field name="gross_per_annum"/>
-                            <field name="pf_fund_no"/>
-                            <field name="gratuity"/>
-                            <field name="total_retiral"/>
-                            <field name="annual_retiral"/>
-                            <field name="fixed_total_ctc"/>
-                            <field name="pb"/>
-                            <field name="total_ctc"/>
-                        </group>
-                    </group>
+                    <!--                    <group string="Salary Details">-->
+                    <!--                        <group>-->
+                    <!--                            <field name="tenure"/>-->
+                    <!--                            <field name="tenure_detail"/>-->
+                    <!--                            <field name="basic_sal"/>-->
+                    <!--                            <field name="hra"/>-->
+                    <!--                            <field name="convy"/>-->
+                    <!--                            <field name="lta"/>-->
+                    <!--                            <field name="choice_pay"/>-->
+                    <!--                            <field name="special_allow"/>-->
+                    <!--                        </group>-->
+                    <!--                        <group>-->
+                    <!--                            <field name="gross_per_month"/>-->
+                    <!--                            <field name="gross_per_annum"/>-->
+                    <!--                            <field name="pf_fund_no"/>-->
+                    <!--                            <field name="gratuity"/>-->
+                    <!--                            <field name="total_retiral"/>-->
+                    <!--                            <field name="annual_retiral"/>-->
+                    <!--                            <field name="fixed_total_ctc"/>-->
+                    <!--                            <field name="pb"/>-->
+                    <!--                            <field name="total_ctc"/>-->
+                    <!--                        </group>-->
+                    <!--                    </group>-->
                 </page>
             </xpath>
         </field>
