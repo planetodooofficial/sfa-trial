@@ -15,7 +15,7 @@ class TravelRequisitionExpense(models.Model):
     company = fields.Char(string='Company', related='name_new.company_id.name', store=True)
     purpose_of_visit = fields.Char(string='Purpose of Visit')
     approved_by = fields.Char(string='Approved By', related='name_new.parent_id.name', store=True)
-    pan_no_new = fields.Char(string='Pan Card Number', store=True)
+    pan_no_new = fields.Char(string='Pan Card Number', related='name_new.pan', store=True)
     dl_number = fields.Char(string='Driving License Number', related='name_new.dl_no', store=True)
     age = fields.Integer(string='Age')
     pass_name = fields.Char(string='Name on Passport', related='name_new.name_on_passport', store=True)
@@ -86,7 +86,7 @@ class TravelRequisitionExpense(models.Model):
         _name = 'stay.details.line'
 
         hr_exp_id = fields.Many2one('hr.expense', string='Hr Expense Id')
-        name_line = fields.Many2one('hr.employee', string='Name')
+        name_line = fields.Many2one('hr.employee', string='Name', related='hr_exp_id.name_new')
         band_line = fields.Char(string='Band')
         hotel_guest_line = fields.Char(string='Hotel / Guest House')
         location_line = fields.Char(string='Location')

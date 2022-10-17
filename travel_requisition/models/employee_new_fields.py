@@ -59,7 +59,6 @@ class HrEmployeeInherit(models.Model):
     va_iv = fields.Selection([('va', 'VA'), ('iv', 'IV')], string="VA/IV")
     reason_for_leave = fields.Char(string='Reason For Leaving')
 
-
     # Overriding the create method and assigning the sequence for the record
     @api.model
     def create(self, vals):
@@ -100,26 +99,9 @@ class HrContractInherit(models.Model):
     bank_account_no = fields.Char(string="Bank Account Number")
     bank_ifsc = fields.Char(string="Bank IFSC")
 
-
     @api.model
     def create(self, vals):
         res = super(HrContractInherit, self).create(vals)
-
-        # emp_rec = self.env['hr.employee'].browse(vals.get('employee_id'))
-        # cont_ref = []
-        #
-        # emid = emp_rec.mapped('emp_code')
-        # print('emid=', emid.key())
-        #
-        # empname = emp_rec.mapped('name')
-        # print('empname=', empname)
-        #
-        # empgrade = emp_rec.mapped('grade.grade_new')
-        # print('empgrade=', empgrade)
-        #
-        # # cont_ref.append(emid)
-        # # print(str(cont_ref))
-
         if res:
             res.state = 'open'
         return res
