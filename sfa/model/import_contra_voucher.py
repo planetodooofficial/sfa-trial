@@ -75,9 +75,10 @@ class ContraVoucher(models.Model):
                 print(i, 'clean data')
                 journal_entry_id = False
                 c = []
-                search_journal_entry = self.env['account.move'].search(
-                    [('ref', '=', voucher_no), ('journal_id', '=', 14)])
+
                 search_journal = self.env['account.journal'].search([('name', '=', 'Contra')])
+                search_journal_entry = self.env['account.move'].search(
+                    [('ref', '=', voucher_no), ('journal_id', '=', search_journal.id)])
                 search_currency = self.env['res.currency'].search([('name', '=', 'INR')])
                 account = self.env['account.account'].search([('name', '=', customer)])
                 journal_items = []
