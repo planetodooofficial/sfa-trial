@@ -9,6 +9,9 @@
     "data": [
         "security/ir.model.access.csv",
         "wizards/analytic_account_wizard.xml",
+        "reports/report.xml",
+        "reports/proforma_invoice.xml",
+        "reports/salary_slip.xml",
         "views/account.xml",
         "views/cost_profit_center.xml",
         "views/location.xml",
@@ -20,10 +23,6 @@
         "views/partner.xml",
         "views/import_contra_voucher.xml",
         "views/accounting.xml",
-        "reports/report.xml",
-        "reports/proforma_invoice.xml",
-        "reports/salary_slip.xml",
-
     ],
     "assets": {
         "web.assets_backend": [
