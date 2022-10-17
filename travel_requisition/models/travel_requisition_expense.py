@@ -6,7 +6,7 @@ from odoo import models, fields, api, _
 class TravelRequisitionExpense(models.Model):
     _inherit = 'hr.expense'
 
-    name_new = fields.Many2one('hr.employee', string='Name', default=lambda self: self.env.user)
+    name_new = fields.Many2one('hr.employee', string='Name', default=(lambda self: self.env.user))
     emp_code = fields.Char(string='Employee Code', related='name_new.emp_code', store=True)
     band = fields.Char(string='Band')
     mobile = fields.Char(string='Mobile No.', related='name_new.mobile_phone', store=True)
