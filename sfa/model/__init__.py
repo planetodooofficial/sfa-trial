@@ -4,3 +4,5 @@ from .import location
 from .import analytic_account
 from . import import_vendor_bills
 from . import partner
+from . import import_contra_voucher
+from . import accounting

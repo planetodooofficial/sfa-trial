@@ -15,7 +15,10 @@
         "views/sub_departments.xml",
         "views/analytic_account.xml",
         "views/import_vendor_bills_view.xml",
-        "views/partner.xml"
+        "views/partner.xml",
+        "views/import_contra_voucher.xml",
+        "views/accounting.xml",
+
     ],
     "assets": {
         "web.assets_backend": [
