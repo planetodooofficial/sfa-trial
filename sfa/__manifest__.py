@@ -16,13 +16,13 @@
         "views/sub_departments.xml",
         "views/analytic_account.xml",
         "views/res_view.xml",
-        "reports/report.xml",
-        "reports/proforma_invoice.xml",
-        "reports/salary_slip.xml",
         "views/import_vendor_bills_view.xml",
         "views/partner.xml",
         "views/import_contra_voucher.xml",
         "views/accounting.xml",
+        "reports/report.xml",
+        "reports/proforma_invoice.xml",
+        "reports/salary_slip.xml",
 
     ],
     "assets": {
