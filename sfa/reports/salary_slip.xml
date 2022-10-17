@@ -161,35 +161,76 @@
                                     <b>Amount</b>
                                 </td>
                             </tr>
+                            <t t-set="total_deduction" t-value="0"/>
                             <tr>
                                 <td class="td_style">Basic Salary</td>
-                                <td style="width:12%; text-align:right;" class="td_style"></td>
+                                <td style="width:12%; text-align:right;" class="td_style">
+                                    <t t-foreach="doc.line_ids" t-as="line">
+                                        <t t-if="line.name =='Basic Salary'">
+                                            <t t-esc="line.total"/>
+                                        </t>
+                                    </t>
+
+                                </td>
                                 <td style="width:13%; text-align:right;" class="td_style"></td>
                                 <td class="td_style">Provident Fund</td>
-                                <td class="td_style"></td>
+                                <td class="td_style" style="text-align:right;">
+                                    <t t-foreach="doc.line_ids" t-as="line">
+                                        <t t-if="line.name =='Employee\'s PF Contribution'">
+                                            <t t-esc="line.total"/>
+                                        </t>
+                                        <t t-set="total_deduction" t-value="line.total + total_deduction"/>
+                                    </t>
+                                </td>
                             </tr>
                             <tr>
                                 <td class="td_style">HRA</td>
-                                <td style="width:12%;" class="td_style"></td>
+                                <td style="width:12%; text-align:right;" class="td_style">
+                                    <t t-foreach="doc.line_ids" t-as="line">
+                                        <t t-if="line.name =='House Rent Allowance'">
+                                            <t t-esc="line.total"/>
+                                        </t>
+                                    </t>
+                                </td>
                                 <td style="width:13%;" class="td_style"></td>
                                 <td class="td_style">ESIC</td>
-                                <td class="td_style">
+                                <td class="td_style" tyle="text-align:right;">
                                     <t t-esc="doc.employee_id.esic_number"/>
                                 </td>
                             </tr>
                             <tr>
                                 <td class="td_style">Conveyance A</td>
-                                <td style="width:12%;" class="td_style"></td>
+                                <td style="width:12%; text-align:right;" class="td_style">
+                                    <t t-foreach="doc.line_ids" t-as="line">
+                                        <t t-if="line.name =='Transport/Conveyance Allownace'">
+                                            <t t-esc="line.total"/>
+                                        </t>
+                                    </t>
+                                </td>
                                 <td style="width:13%;" class="td_style"></td>
                                 <td class="td_style">Professional Tax</td>
-                                <td class="td_style"></td>
+                                <td class="td_style" style="text-align:right;">
+                                    <t t-foreach="doc.line_ids" t-as="line">
+                                        <t t-if="line.name =='Professional Tax'">
+                                            <t t-esc="line.total"/>
+                                        </t>
+                                        <t t-set="total_deduction" t-value="line.total
+                                         + total_deduction"/>
+                                    </t>
+                                </td>
                             </tr>
                             <tr>
                                 <td class="td_style">LTA</td>
-                                <td style="width:12%;" class="td_style"></td>
+                                <td style="text-align:right;" class="td_style">
+                                    <t t-foreach="doc.line_ids" t-as="line">
+                                        <t t-if="line.name =='Leave Travel Allowance'">
+                                            <t t-esc="line.total"/>
+                                        </t>
+                                    </t>
+                                </td>
                                 <td style="width:13%;" class="td_style"></td>
                                 <td class="td_style">TDS</td>
-                                <td class="td_style"></td>
+                                <td class="td_style" tyle="text-align:right;"></td>
                             </tr>
                             <tr>
                                 <td class="td_style">Special Allowance</td>
@@ -201,15 +242,14 @@
                                 <td class="td_style"></td>
                             </tr>
                             <tr>
-                                <td class="td_style">HRA</td>
-                                <td style="width:12%;" class="td_style"></td>
-                                <td style="width:13%;" class="td_style"></td>
-                                <td class="td_style"></td>
-                                <td class="td_style"></td>
-                            </tr>
-                            <tr>
                                 <td class="td_style">Choice Pay</td>
-                                <td style="width:12%;" class="td_style"></td>
+                                <td style="width:12%; text-align:right;" class="td_style">
+                                    <t t-foreach="doc.line_ids" t-as="line">
+                                        <t t-if="line.name =='Choice pay'">
+                                            <t t-esc="line.total"/>
+                                        </t>
+                                    </t>
+                                </td>
                                 <td style="width:13%;" class="td_style"></td>
                                 <td class="td_style"/>
                                 <td class="td_style"/>
@@ -239,8 +279,14 @@
                                 <td class="td_style">
                                     <b>Total Earnings</b>
                                 </td>
-                                <td style="width:12%;" class="td_style">
-                                    <b>27000</b>
+                                <td style="width:12%; text-align:right;" class="td_style">
+                                    <b>
+                                        <t t-foreach="doc.line_ids" t-as="line">
+                                            <t t-if="line.name =='Gross'">
+                                                <t t-esc="line.total"/>
+                                            </t>
+                                        </t>
+                                    </b>
                                 </td>
                                 <td style="width:13%;" class="td_style">
                                     <b>8708</b>
@@ -249,7 +295,7 @@
                                     <b>Total Deduction</b>
                                 </td>
                                 <td class="td_style">
-                                    <b>581</b>
+                                    <b></b>
                                 </td>
                             </tr>
                             <tr>
@@ -257,7 +303,13 @@
                                     <b>Net Payable</b>
                                 </td>
                                 <td colspan="4" class="text-center" style="border:1px solid black; text-align: center;">
-                                    <b>8127</b>
+                                    <b>
+                                        <t t-foreach="doc.line_ids" t-as="line">
+                                            <t t-if="line.name =='Net Salary'">
+                                                <t t-esc="line.total"/>
+                                            </t>
+                                        </t>
+                                    </b>
                                 </td>
                             </tr>
                             <tr>
@@ -265,8 +317,10 @@
                                     <b>In Words</b>
                                 </td>
                                 <td colspan="4" class="td_style" style="border:1px solid black; text-align: center;">
-                                    <b>Rupees Eight Thousand One
-                                        Hundred Twenty Seven Only
+                                    <b>
+                                        <!--                                        <span style="text-transform: capitalize;"-->
+                                        <!--                                              t-esc="str(num2words(doc.amt))"/>-->
+                                        <!--                                        <span>Paise</span>-->
                                     </b>
                                 </td>
                             </tr>
