@@ -45,9 +45,9 @@ class HrEmployeeInherit(models.Model):
     emp_state_id = fields.Char(string="State")
 
     # bank fields
-    bank_name = fields.Char(string="Bank Name")
-    bank_accountno = fields.Integer(string="Bank Account Number")
-    bank_ifsc = fields.Char(string="Bank IFSC Code")
+    # bank_name = fields.Char(string="Bank Name")
+    # bank_accountno = fields.Integer(string="Bank Account Number")
+    # bank_ifsc = fields.Char(string="Bank IFSC Code")
 
     # master data fields
     # designation = fields.Many2one('designation.master', 'Designation')
@@ -66,23 +66,23 @@ class HrEmployeeInherit(models.Model):
     reason_for_leave = fields.Char(string='Reason For Leaving')
 
     # salary related fields
-    tenure = fields.Float(string="Tenure in SFA")
-    tenure_detail = fields.Char(string="Tenure Detail")
-    basic_sal = fields.Float(string="Basic Salary")
-    hra = fields.Float(string="HRA")
-    convy = fields.Float(string="Convy")
-    lta = fields.Float(string="LTA")
-    choice_pay = fields.Float(string="Choice Pay")
-    special_allow = fields.Float(string="Special Allowance")
-    gross_per_month = fields.Float(string="Gross per Month")
-    gross_per_annum = fields.Float(string="Gross per Annum")
-    pf_fund_no = fields.Integer(string="Provident Fund No. (PF)")
-    gratuity = fields.Float(string="Gratuity")
-    total_retiral = fields.Float(string="Total Retiral")
-    annual_retiral = fields.Float(string="Annual Retiral")
-    fixed_total_ctc = fields.Float(string="Fixed Total Retiral")
-    pb = fields.Float(string="PB")
-    total_ctc = fields.Float(string="Total CTC")
+    # tenure = fields.Float(string="Tenure in SFA")
+    # tenure_detail = fields.Char(string="Tenure Detail")
+    # basic_sal = fields.Float(string="Basic Salary")
+    # hra = fields.Float(string="HRA")
+    # convy = fields.Float(string="Convy")
+    # lta = fields.Float(string="LTA")
+    # choice_pay = fields.Float(string="Choice Pay")
+    # special_allow = fields.Float(string="Special Allowance")
+    # gross_per_month = fields.Float(string="Gross per Month")
+    # gross_per_annum = fields.Float(string="Gross per Annum")
+    # pf_fund_no = fields.Integer(string="Provident Fund No. (PF)")
+    # gratuity = fields.Float(string="Gratuity")
+    # total_retiral = fields.Float(string="Total Retiral")
+    # annual_retiral = fields.Float(string="Annual Retiral")
+    # fixed_total_ctc = fields.Float(string="Fixed Total Retiral")
+    # pb = fields.Float(string="PB")
+    # total_ctc = fields.Float(string="Total CTC")
 
     # Overriding the create method and assigning the sequence for the record
     @api.model
@@ -121,7 +121,7 @@ class HrContractInherit(models.Model):
 
     date_of_leaving = fields.Date(string="Date of Leaving (DOL)")
     bank_name = fields.Char(string="Bank Name")
-    bank_account_no = fields.Integer(string="Bank Account Number")
+    bank_account_no = fields.Char(string="Bank Account Number")
     bank_ifsc = fields.Char(string="Bank IFSC")
 
     # @api.depends('employee_id')
