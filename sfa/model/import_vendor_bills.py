@@ -38,26 +38,28 @@ class VendorBills(models.Model):
             b.append(data)
         c = []  # c is list of column names with data  of each row
         key_list = []
-        tax = False
-        address = None
-        gstin = None
-        tax_value = False
-        tax_gst = False
-        vendor_bill_id = False
-        sgst = False
-        cgst = False
-        customer = False
-        supplier = False
-        voucher_no = False
-        voucher_type = False
-        date = False
-        supplier_invoice_date = False
-        pan_no = False
 
-        taxes = []
+
+
 
         action_conf = self.env['account.move']
         for rec in b:
+            tax = False
+            address = None
+            gstin = None
+            tax_value = False
+            tax_gst = False
+            vendor_bill_id = False
+            sgst = False
+            cgst = False
+            customer = False
+            supplier = False
+            voucher_no = False
+            voucher_type = False
+            date = False
+            supplier_invoice_date = False
+            pan_no = False
+
             key_list.append(rec.keys())
             if 'Date' in rec.keys():
                 date = rec['Date']
@@ -118,6 +120,7 @@ class VendorBills(models.Model):
             print(rec,"recccc")
             keys_list = [key for key, val in rec.items() if val]
             c.append(keys_list)
+
             for i in c:  # i is particular row
                 if 'Date' in i:
                     i.remove('Date')
@@ -154,6 +157,7 @@ class VendorBills(models.Model):
                 print(i, 'clean data')
                 tds_values = ['TDS Payable- 194C A.Y. 2023-24', 'TDS Payable - 194J A.Y. 2023-24',
                               'TDS Payable - 194B A.Y. 2023-24', 'TDS Payable - 194I A.Y. 2023-24']
+                taxes = []
                 data_without_tds = []
                 data_with_tds = []
                 for m in i:
@@ -185,7 +189,7 @@ class VendorBills(models.Model):
 
                 if tax_value:
                     gst_type = self.env['account.tax'].search(
-                        [('name', '=', tax_value), ('type_tax_use', '=', 'sale')])
+                        [('name', '=', tax_value), ('type_tax_use', '=', 'purchase')])
                     gst = gst_type.id
                     taxes.append(gst)
                 vendor_lst = []
