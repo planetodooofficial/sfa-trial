@@ -1,8 +1,9 @@
-from . import analytic_account
-from . import account
-from . import res_partner
-from . import cost_profit_center
+from .import account
+from .import analytic_account
+from .import cost_profit_center
+from .import hr_payslip
 from . import import_vendor_bills
 from . import partner
-from . import hr_payslip
-
+from . import import_contra_voucher
+from . import accounting
+from . import res_partner

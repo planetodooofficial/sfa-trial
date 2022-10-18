@@ -22,7 +22,7 @@ class VendorBills(models.Model):
         return pd.read_csv(file_obj).fillna(False)
 
     def import_vendor_bills(self):
-        global vendor_bill_id, tax, address, pan_no, gstin
+        global vendor_bill_id, tax, address, gstin
         gst = False
         igst = False
         supplier_invoice_no = None
@@ -38,18 +38,25 @@ class VendorBills(models.Model):
             b.append(data)
         c = []  # c is list of column names with data  of each row
         key_list = []
-        tax = False
-        address = None
-        gstin = None
-        tax_value = False
-        tax_gst = False
-        vendor_bill_id = False
-        sgst = False
-        cgst = False
-        taxes = []
 
         action_conf = self.env['account.move']
         for rec in b:
+            tax = False
+            address = None
+            gstin = None
+            tax_value = False
+            tax_gst = False
+            vendor_bill_id = False
+            sgst = False
+            cgst = False
+            customer = False
+            supplier = False
+            voucher_no = False
+            voucher_type = False
+            date = False
+            supplier_invoice_date = False
+            pan_no = False
+
             key_list.append(rec.keys())
             if 'Date' in rec.keys():
                 date = rec['Date']
@@ -107,9 +114,10 @@ class VendorBills(models.Model):
                 tax = rec['GST Rate']
             if 'IGST' in rec.keys():
                 igst = rec['IGST']
-            print(rec,"recccc")
+            print(rec, "recccc")
             keys_list = [key for key, val in rec.items() if val]
             c.append(keys_list)
+
             for i in c:  # i is particular row
                 if 'Date' in i:
                     i.remove('Date')
@@ -145,7 +153,8 @@ class VendorBills(models.Model):
                     i.remove('IGST')
                 print(i, 'clean data')
                 tds_values = ['TDS Payable- 194C A.Y. 2023-24', 'TDS Payable - 194J A.Y. 2023-24',
-                              'TDS Payable - 194B A.Y. 2023-24']
+                              'TDS Payable - 194B A.Y. 2023-24', 'TDS Payable - 194I A.Y. 2023-24']
+                taxes = []
                 data_without_tds = []
                 data_with_tds = []
                 for m in i:
@@ -154,112 +163,116 @@ class VendorBills(models.Model):
                     else:
                         data_without_tds.append(m)
 
-
-
             #    now row data is cleaned
             search_customer = self.env['res.partner'].search([('name', '=', customer)])
             search_supplier = self.env['res.partner'].search([('name', '=', supplier)])
-            search_vendor_bill = self.env['account.move'].search([('payment_reference', '=', voucher_no)])
-            new_date = date.replace(" ", "/")
-            date = datetime.strptime(new_date, '%d/%b/%y')
-            new_invoice_date = supplier_invoice_date.replace(" ", "/")
-            supplier_invoice_date = datetime.strptime(new_invoice_date, '%d/%b/%y')
-            search_product = self.env['product.product'].search([('name', '=', 'Services')])
-
-            # compute tax weather it is gst or igst
-            if sgst:
-                tax_value = 'GST' + ' ' + tax
-            elif igst:
-                tax_value = 'IGST' + ' ' + tax
-
-            if tax_value:
-                gst_type = self.env['account.tax'].search(
-                    [('name', '=', tax_value), ('type_tax_use', '=', 'sale')])
-                gst = gst_type.id
-                taxes.append(gst)
-            vendor_lst = []
-
-            if not address:
-                address = None
-
-            if not gstin:
-                gstin = None
-
-            if not search_customer:  # create customer if not created if not gstin type is set to unregistered else regular
-                if gstin:
-                    customer_vals = {
-                        'name': customer,
-                        'l10n_in_gst_treatment': 'regular',
-                        'street': address,
-                        'pan_no': pan_no,
-                        'vat': gstin,
-                    }
-                    search_customer = self.env['res.partner'].create(customer_vals)
-                else:
-                    customer_vals = {
-                        'name': customer,
-                        'l10n_in_gst_treatment': 'unregistered',
-                        'street': address,
-                        'pan_no': pan_no,
-                        'vat': gstin,
-                    }
-                    search_customer = self.env['res.partner'].create(customer_vals)
-            # create vendor bill if payment_reference (i.e:- reference invoice number) is new
-            vendor_bills_values = {
-                'move_type': 'in_invoice',
-                # 'name': supplier_invoice_no,
-                'ref': supplier_invoice_no,
-                'payment_reference': voucher_no,
-                'partner_id': search_customer.id,
-                'invoice_date': supplier_invoice_date,
-                'date': date,
-                'l10n_in_gst_treatment': 'regular',
-            }
+            search_vendor_bill = self.env['account.move'].search(
+                [('payment_reference', '=', voucher_no), ('voucher_type', '=', voucher_type)])
             if not search_vendor_bill:
-                vendor_bill_id = search_vendor_bill.sudo().create(vendor_bills_values)
-            # FOR loop on clean data z is key
-                print(data_without_tds, 'data without tds')
-                for key in data_without_tds:
-                    coa = self.env['account.account'].search([('name', '=', key)])
-                    value = rec[key]
-                    print(rec[key], 'key')# get value
-                    gross_total = float(value[:-3])
-                    if len(data_with_tds) > 0:
-                        for tds_data in data_with_tds:
-                            tds = self.env['account.tax'].search([('name', '=', tds_data)])
-                            taxes.append(tds.id)
-                    else:
-                        pass
-                    print(taxes,'taxes')
-                    if key == 'Cancellation Charges' or key == 'Cancellation Charges - HO':
-                        gross_total = -(gross_total)
-                    if len(taxes) > 0:
-                        if key == 'Travelling Expenses' or key == 'Ineligible ITC-IGST' or key == 'Travelling Expenses-HO':
-                            vendor_bill_vals_ids = (0, 0, {
-                                'product_id': search_product.id,
-                                'name': voucher_type,
-                                'account_id': coa.id,
-                                'price_unit': gross_total,
-                            })
-                            vendor_lst.append(vendor_bill_vals_ids)
-                        else:
-                            print(taxes,'taxessss')
-                            vendor_bill_vals_ids = (0, 0, {
-                                'product_id': search_product.id,
-                                'name': voucher_type,
-                                'account_id': coa.id,
-                                'price_unit': gross_total,
-                                'tax_ids': [(4, tax) for tax in taxes]
-                            })
-                            vendor_lst.append(vendor_bill_vals_ids)
-                    else:
-                        vendor_bill_vals_ids = (0, 0, {
-                            'product_id': search_product.id,
-                            'name': voucher_type,
-                            'account_id': coa.id,
-                            'price_unit': gross_total,
-                        })
-                        vendor_lst.append(vendor_bill_vals_ids)
+                if date:
+                    new_date = date.replace(" ", "/")
+                    date = datetime.strptime(new_date, '%d/%b/%y')
+                if supplier_invoice_date:
+                    new_invoice_date = supplier_invoice_date.replace(" ", "/")
+                    supplier_invoice_date = datetime.strptime(new_invoice_date, '%d/%b/%y')
+                search_product = self.env['product.product'].search([('name', '=', 'Services')])
 
-                vendor_bill_id.write({'invoice_line_ids': vendor_lst, 'narration': narration})
-                vendor_bill_id.action_post()
+                # compute tax weather it is gst or igst
+                if tax:
+                    if sgst:
+                        tax_value = 'GST' + ' ' + tax
+                    if igst:
+                        tax_value = 'IGST' + ' ' + tax
+
+                if tax_value:
+                    gst_type = self.env['account.tax'].search(
+                        [('name', '=', tax_value), ('type_tax_use', '=', 'purchase')])
+                    gst = gst_type.id
+                    taxes.append(gst)
+                vendor_lst = []
+
+                if not address:
+                    address = None
+
+                if not gstin:
+                    gstin = None
+
+                if not search_customer:  # create customer if not created if not gstin type is set to unregistered else regular
+                    if gstin:
+                        customer_vals = {
+                            'name': customer,
+                            'l10n_in_gst_treatment': 'regular',
+                            'street': address,
+                            'pan_no': pan_no,
+                            'vat': gstin,
+                        }
+                        search_customer = self.env['res.partner'].create(customer_vals)
+                    else:
+                        customer_vals = {
+                            'name': customer,
+                            'l10n_in_gst_treatment': 'unregistered',
+                            'street': address,
+                            'pan_no': pan_no,
+                            'vat': gstin,
+                        }
+                        search_customer = self.env['res.partner'].create(customer_vals)
+                # create vendor bill if payment_reference (i.e:- reference invoice number) is new
+                vendor_bills_values = {
+                    'move_type': 'in_invoice',
+                    # 'name': supplier_invoice_no,
+                    'ref': supplier_invoice_no,
+                    'voucher_type': voucher_type,
+                    'payment_reference': voucher_no,
+                    'partner_id': search_customer.id,
+                    'invoice_date': supplier_invoice_date,
+                    'date': date,
+                    'l10n_in_gst_treatment': 'regular',
+                }
+                if not search_vendor_bill:
+                    vendor_bill_id = search_vendor_bill.sudo().create(vendor_bills_values)
+                    # FOR loop on clean data z is key
+                    print(data_without_tds, 'data without tds')
+                    for key in data_without_tds:
+                        coa = self.env['account.account'].search([('name', '=', key)])
+                        value = rec[key]
+                        print(rec[key], 'key')  # get value
+                        gross_total = float(value[:-3])
+                        if len(data_with_tds) > 0:
+                            for tds_data in data_with_tds:
+                                tds = self.env['account.tax'].search([('name', '=', tds_data)])
+                                taxes.append(tds.id)
+                        else:
+                            pass
+                        print(taxes, 'taxes')
+                        if key == 'Cancellation Charges' or key == 'Cancellation Charges - HO' or key == 'Discount':
+                            gross_total = -(gross_total)
+                        if len(taxes) > 0:
+                            if key == 'Travelling Expenses' or key == 'Ineligible ITC-IGST' or key == 'Travelling Expenses-HO' or key == 'Discount':
+                                vendor_bill_vals_ids = (0, 0, {
+                                    'product_id': search_product.id,
+                                    'name': voucher_type,
+                                    'account_id': coa.id,
+                                    'price_unit': gross_total,
+                                })
+                                vendor_lst.append(vendor_bill_vals_ids)
+                            else:
+                                print(taxes, 'taxessss')
+                                vendor_bill_vals_ids = (0, 0, {
+                                    'product_id': search_product.id,
+                                    'name': voucher_type,
+                                    'account_id': coa.id,
+                                    'price_unit': gross_total,
+                                    'tax_ids': [(4, tax) for tax in taxes]
+                                })
+                                vendor_lst.append(vendor_bill_vals_ids)
+                        else:
+                            vendor_bill_vals_ids = (0, 0, {
+                                'product_id': search_product.id,
+                                'name': voucher_type,
+                                'account_id': coa.id,
+                                'price_unit': gross_total,
+                            })
+                            vendor_lst.append(vendor_bill_vals_ids)
+
+                    vendor_bill_id.write({'invoice_line_ids': vendor_lst, 'narration': narration})
+                    vendor_bill_id.action_post()

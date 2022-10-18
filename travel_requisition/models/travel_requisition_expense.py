@@ -86,7 +86,7 @@ class TravelRequisitionExpense(models.Model):
         _name = 'stay.details.line'
 
         hr_exp_id = fields.Many2one('hr.expense', string='Hr Expense Id')
-        name_line = fields.Many2one('hr.employee', string='Name')
+        name_line = fields.Many2one('hr.employee', string='Name', related='hr_exp_id.name_new')
         band_line = fields.Char(string='Band')
         hotel_guest_line = fields.Char(string='Hotel / Guest House')
         location_line = fields.Char(string='Location')

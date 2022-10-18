@@ -32,7 +32,8 @@
     </record>
 
 
-    <menuitem id="menu_import" name="Import Vendor Bills" sequence="7" parent="account.account_management_menu"
-              action="import_file_action"/>
+    <menuitem id="menu_import_vendor" name="Import Vendor Bills" sequence="10" parent="account.account_management_menu"
+              action="sfa.import_file_action"/>
+
 
 </odoo>
