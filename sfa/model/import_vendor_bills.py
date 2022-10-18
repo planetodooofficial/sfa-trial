@@ -56,6 +56,7 @@ class VendorBills(models.Model):
             date = False
             supplier_invoice_date = False
             pan_no = False
+            narration = False
 
             key_list.append(rec.keys())
             if 'Date' in rec.keys():
