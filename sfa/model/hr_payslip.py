@@ -6,8 +6,8 @@ from odoo.exceptions import UserError, ValidationError
 class InheritPaySlip(models.Model):
     _inherit = 'hr.payslip'
 
-    amt = fields.Char(compute='amt_in_words', string='amt')
+    # days = fields.Integer(compute='_attendance', string='amt')
 
-    def amt_in_words(self):
-        self.amt = self.line_ids.filtered(lambda r: r.category_id.name=='Net').mapped('total')
-        # return amount_to_text_fr(net_total, self.currency_id.symbol)
+    def _compute_total_claimable_amt_words(self, amount):
+        return self.currency_id.amount_to_text(amount)
+
