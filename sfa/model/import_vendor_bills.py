@@ -39,9 +39,6 @@ class VendorBills(models.Model):
         c = []  # c is list of column names with data  of each row
         key_list = []
 
-
-
-
         action_conf = self.env['account.move']
         for rec in b:
             tax = False
@@ -117,7 +114,7 @@ class VendorBills(models.Model):
                 tax = rec['GST Rate']
             if 'IGST' in rec.keys():
                 igst = rec['IGST']
-            print(rec,"recccc")
+            print(rec, "recccc")
             keys_list = [key for key, val in rec.items() if val]
             c.append(keys_list)
 
@@ -166,12 +163,11 @@ class VendorBills(models.Model):
                     else:
                         data_without_tds.append(m)
 
-
-
             #    now row data is cleaned
             search_customer = self.env['res.partner'].search([('name', '=', customer)])
             search_supplier = self.env['res.partner'].search([('name', '=', supplier)])
-            search_vendor_bill = self.env['account.move'].search([('payment_reference', '=', voucher_no), ('voucher_type', '=', voucher_type)])
+            search_vendor_bill = self.env['account.move'].search(
+                [('payment_reference', '=', voucher_no), ('voucher_type', '=', voucher_type)])
             if not search_vendor_bill:
                 if date:
                     new_date = date.replace(" ", "/")
@@ -182,10 +178,11 @@ class VendorBills(models.Model):
                 search_product = self.env['product.product'].search([('name', '=', 'Services')])
 
                 # compute tax weather it is gst or igst
-                if sgst:
-                    tax_value = 'GST' + ' ' + tax
-                elif igst:
-                    tax_value = 'IGST' + ' ' + tax
+                if tax:
+                    if sgst:
+                        tax_value = 'GST' + ' ' + tax
+                    if igst:
+                        tax_value = 'IGST' + ' ' + tax
 
                 if tax_value:
                     gst_type = self.env['account.tax'].search(
@@ -233,12 +230,12 @@ class VendorBills(models.Model):
                 }
                 if not search_vendor_bill:
                     vendor_bill_id = search_vendor_bill.sudo().create(vendor_bills_values)
-                # FOR loop on clean data z is key
+                    # FOR loop on clean data z is key
                     print(data_without_tds, 'data without tds')
                     for key in data_without_tds:
                         coa = self.env['account.account'].search([('name', '=', key)])
                         value = rec[key]
-                        print(rec[key], 'key')# get value
+                        print(rec[key], 'key')  # get value
                         gross_total = float(value[:-3])
                         if len(data_with_tds) > 0:
                             for tds_data in data_with_tds:
@@ -246,11 +243,11 @@ class VendorBills(models.Model):
                                 taxes.append(tds.id)
                         else:
                             pass
-                        print(taxes,'taxes')
-                        if key == 'Cancellation Charges' or key == 'Cancellation Charges - HO':
+                        print(taxes, 'taxes')
+                        if key == 'Cancellation Charges' or key == 'Cancellation Charges - HO' or key == 'Discount':
                             gross_total = -(gross_total)
                         if len(taxes) > 0:
-                            if key == 'Travelling Expenses' or key == 'Ineligible ITC-IGST' or key == 'Travelling Expenses-HO':
+                            if key == 'Travelling Expenses' or key == 'Ineligible ITC-IGST' or key == 'Travelling Expenses-HO' or key == 'Discount':
                                 vendor_bill_vals_ids = (0, 0, {
                                     'product_id': search_product.id,
                                     'name': voucher_type,
@@ -259,7 +256,7 @@ class VendorBills(models.Model):
                                 })
                                 vendor_lst.append(vendor_bill_vals_ids)
                             else:
-                                print(taxes,'taxessss')
+                                print(taxes, 'taxessss')
                                 vendor_bill_vals_ids = (0, 0, {
                                     'product_id': search_product.id,
                                     'name': voucher_type,
