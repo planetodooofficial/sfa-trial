@@ -153,7 +153,7 @@ class VendorBills(models.Model):
                     i.remove('IGST')
                 print(i, 'clean data')
                 tds_values = ['TDS Payable- 194C A.Y. 2023-24', 'TDS Payable - 194J A.Y. 2023-24',
-                              'TDS Payable - 194B A.Y. 2023-24']
+                              'TDS Payable - 194B A.Y. 2023-24', 'TDS Payable - 194I A.Y. 2023-24']
                 data_without_tds = []
                 data_with_tds = []
                 for m in i:
