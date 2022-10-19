@@ -22,7 +22,7 @@ class HrEmployeeInherit(models.Model):
     name_on_passport = fields.Char(string='Name on Passport')
     dl_no = fields.Char(string="Driving License Number")
     title = fields.Selection([('mr', 'Mr.'), ('ms', 'Ms.'), ('mrs', 'Mrs.')], string='Title')
-    age = fields.Char(string="Age", readonly=False)
+    age = fields.Char(string="Age", readonly=False, compute='_compute_age')
     qualification = fields.Char(string="Qualification")
 
     emp_category = fields.Char(string="Category")
@@ -59,6 +59,9 @@ class HrEmployeeInherit(models.Model):
     va_iv = fields.Selection([('va', 'VA'), ('iv', 'IV')], string="VA/IV")
     reason_for_leave = fields.Char(string='Reason For Leaving')
 
+    emp_pass_issue_date = fields.Date(string="Passport Issue Date")
+    emp_pass_issue_loc = fields.Char(string="Passport Issue Location")
+
     # Overriding the create method and assigning the sequence for the record
     @api.model
     def create(self, vals):
@@ -69,11 +72,11 @@ class HrEmployeeInherit(models.Model):
         return res
 
     # function for calculate age based on birthdate
-    # @api.depends('birthday')
-    # def _compute_age(self):
-    #     for emp in self:
-    #         age = relativedelta(datetime.now().date(), fields.Datetime.from_string(emp.birthday)).years
-    #         emp.age = str(age) + " Years"
+    @api.depends('birthday')
+    def _compute_age(self):
+        for emp in self:
+            age = relativedelta(datetime.now().date(), fields.Datetime.from_string(emp.birthday)).years
+            emp.age = str(age) + " Years"
 
     @api.onchange('cur_same_per')
     def _compute_address(self):
@@ -102,6 +105,17 @@ class HrContractInherit(models.Model):
     @api.model
     def create(self, vals):
         res = super(HrContractInherit, self).create(vals)
+
+        # emp_rec = self.env['hr.employee'].browse(vals.get('employee_id'))
+        # emid = emp_rec.mapped('emp_code')
+        # print('emid=', emid)
+        # empname = emp_rec.mapped('name')
+        # print('empname=', empname)
+        # empgrade = emp_rec.mapped('grade.grade_new')
+        # print('empgrade=', empgrade)
+        # final_name = [i[-2:] for i in emid] + empname + empgrade
+        # print("".join(map(str, final_name)))
+
         if res:
             res.state = 'open'
         return res

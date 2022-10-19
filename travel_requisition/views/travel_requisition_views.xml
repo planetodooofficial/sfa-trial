@@ -18,11 +18,12 @@
                     <page string="Travel Requisitions">
                         <group>
                             <group>
-                                <field name="name_new"/>
                                 <field name="emp_code"/>
+                                <field name="t_grade"/>
+                                <field name="t_cadre"/>
+                                <field name="t_grade_title"/>
                             </group>
                             <group>
-                                <field name="band"/>
                                 <field name="mobile"/>
                             </group>
                         </group>
@@ -33,7 +34,7 @@
                                 <field name="designation"/>
                             </group>
                             <group>
-                                <field name="company"/>
+                                <field name="company_id"/>
                             </group>
                         </group>
 
@@ -41,9 +42,9 @@
                             <group>
                                 <field name="purpose_of_visit"/>
                             </group>
-                            <group>
-                                <field name="approved_by"/>
-                            </group>
+                            <!--<group>-->
+                            <!--<field name="approved_by"/>-->
+                            <!--</group>-->
                         </group>
 
                         <separator string="Travel Details" style="color:#7d435d; font-size:18px; font-weight:bold"/>
@@ -52,9 +53,9 @@
                                 <tree editable="bottom">
                                     <field name="date" width="20%"/>
                                     <field name="from_dates" width="20%"/>
+                                    <field name="departs_time" width="20%" widget="float_time"/>
                                     <field name="to_dates" width="20%"/>
-                                    <field name="departs_time" width="20%"/>
-                                    <field name="arrives_time" width="20%"/>
+                                    <field name="arrives_time" width="20%" widget="float_time"/>
                                     <field name="mode_and_class" width="20%"/>
                                 </tree>
                             </field>
@@ -73,7 +74,12 @@
                                            style="color:#7d435d; font-size:16px; font-weight:bold"/>
                                 <field name="pass_name"/>
                                 <field name="pass_no"/>
-                                <field name="date_place"/>
+
+                                <label for="pass_issue_date" string="Date &amp; Place of Issue"/>
+                                <div class="o_row">
+                                    <field name="pass_issue_date" nolabel="1"/>
+                                    <field name="pass_issue_loc" nolabel="1"/>
+                                </div>
                             </group>
                         </group>
 
@@ -82,7 +88,6 @@
                             <field name="stay_detail_line_ids" nolabel="1">
                                 <tree editable="bottom">
                                     <field name="name_line" width="20%"/>
-                                    <field name="band_line" width="20%"/>
                                     <field name="hotel_guest_line" width="20%"/>
                                     <field name="location_line" width="20%"/>
                                     <field name="check_in_date" width="20%"/>
@@ -124,7 +129,6 @@
             </xpath>
         </field>
     </record>
-
 
 
     <!-- changing default domain of My Expenses(my reimbursement) to Report menu items action in hr.expenses

@@ -42,6 +42,12 @@
             </xpath>
 
             <xpath expr="//field[@name='passport_id']" position="after">
+                <label for="emp_pass_issue_date" string="Date &amp; Place of Issue"/>
+<!--                <h6>Date &amp; Place of Issue</h6>-->
+                <div class="o_row">
+                    <field name="emp_pass_issue_date" nolabel="1"/>
+                    <field name="emp_pass_issue_loc" nolabel="1"/>
+                </div>
                 <field name="dl_no"/>
             </xpath>
 
@@ -121,30 +127,6 @@
                             <field name="reason_for_leave"/>
                         </group>
                     </group>
-
-                    <!--                    <group string="Salary Details">-->
-                    <!--                        <group>-->
-                    <!--                            <field name="tenure"/>-->
-                    <!--                            <field name="tenure_detail"/>-->
-                    <!--                            <field name="basic_sal"/>-->
-                    <!--                            <field name="hra"/>-->
-                    <!--                            <field name="convy"/>-->
-                    <!--                            <field name="lta"/>-->
-                    <!--                            <field name="choice_pay"/>-->
-                    <!--                            <field name="special_allow"/>-->
-                    <!--                        </group>-->
-                    <!--                        <group>-->
-                    <!--                            <field name="gross_per_month"/>-->
-                    <!--                            <field name="gross_per_annum"/>-->
-                    <!--                            <field name="pf_fund_no"/>-->
-                    <!--                            <field name="gratuity"/>-->
-                    <!--                            <field name="total_retiral"/>-->
-                    <!--                            <field name="annual_retiral"/>-->
-                    <!--                            <field name="fixed_total_ctc"/>-->
-                    <!--                            <field name="pb"/>-->
-                    <!--                            <field name="total_ctc"/>-->
-                    <!--                        </group>-->
-                    <!--                    </group>-->
                 </page>
             </xpath>
         </field>
