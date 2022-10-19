@@ -22,6 +22,7 @@
         "views/import_vendor_bills_view.xml",
         "views/partner.xml",
         "views/import_contra_voucher.xml",
+        "views/import_receipt_register.xml",
         "views/accounting.xml",
     ],
     "assets": {

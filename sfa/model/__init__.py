@@ -7,3 +7,4 @@ from . import partner
 from . import import_contra_voucher
 from . import accounting
 from . import res_partner
+from . import import_receipt_register
