@@ -94,7 +94,7 @@ class ReceiptRegister(models.Model):
                 else:
                     customer = customer
 
-                account = self.env['account.account'].sudo().search([('name', 'ilike', customer.strip())])
+                account = self.env['account.account'].sudo().search([('name', '=', customer.strip())])
                 journal_items = []
                 journal_value = {
                     'ref': voucher_no,
