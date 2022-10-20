@@ -39,6 +39,7 @@ class ReceiptRegister(models.Model):
             key_list = []
             key_list.append(rec.keys())
             date = None
+            customer = False
             if 'Date' in rec.keys():
                 date = rec['Date']
             if 'Particulars' in rec.keys():
@@ -84,11 +85,16 @@ class ReceiptRegister(models.Model):
                 journal_entry_id = False
                 c = []
 
-                search_journal = self.env['account.journal'].search([('name', '=', 'Receipt Register')])
+                search_journal = self.env['account.journal'].search([('name', '=', 'Payment Register')])
                 search_journal_entry = self.env['account.move'].search(
                     [('ref', '=', voucher_no), ('journal_id', '=', search_journal.id)])
                 search_currency = self.env['res.currency'].search([('name', '=', 'INR')])
-                account = self.env['account.account'].search([('name', '=', customer.strip())])
+                if '\n' in customer:
+                    customer = customer.replace('\n', '')
+                else:
+                    customer = customer
+
+                account = self.env['account.account'].sudo().search([('name', 'ilike', customer.strip())])
                 journal_items = []
                 journal_value = {
                     'ref': voucher_no,
