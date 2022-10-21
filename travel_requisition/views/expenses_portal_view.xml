@@ -1,12 +1,128 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <template id="portal_my_expense" name="My Expenses" customize_show="True" inherit_id="portal.portal_my_home">
+
+    <!-- all expense list template -->
+    <template id="expenses">
+        <t t-call="website.layout">
+            <title>Expenses</title>
+            <div class="oe_structure"/>
+            <div class="oe_structure">
+                <div class="container">
+                    <t t-foreach="expenses" t-as="expense">
+                        <p>
+                            <a t-attf-href="/my/MyReimbursement/{{ slug(expense) }}">
+                                <t t-esc="expense.name"/>
+                            </a>
+                        </p>
+                    </t>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <!-- selected expense details template -->
+    <template id="expense_detail">
+        <t t-call="website.layout">
+            <title>Expenses</title>
+            <div class="oe_structure"/>
+            <div class="oe_structure">
+                <div class="container">
+                    <h3>
+                        <t t-esc="expense.name"/>
+                    </h3>
+                    <li>
+                        <t t-esc="expense.employee_id.name"/>
+                    </li>
+                    <li>
+                        <t t-esc="expense.payment_mode"/>
+                    </li>
+                    <li>
+                        <t t-esc="expense.date"/>
+                    </li>
+                    <li>
+                        <t t-esc="expense.state"/>
+                    </li>
+                    <li>
+                        <t t-esc="expense.total_amount"/>
+                    </li>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <!-- adding expenses block in My Account menu of website -->
+    <template id="portal_all_expenses" name="Portal My Home : Expenses" customize_show="True"
+              inherit_id="portal.portal_my_home">
         <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
             <t t-call="portal.portal_docs_entry">
                 <t t-set="title">Expenses</t>
-                <t t-set="url" t-value="'/my/expense'"/>
-                <t t-set="placeholder_count" t-value="'count_expense'"/>
+                <t t-set="url" t-value="'/my/MyReimbursement/'"/>
+                <t t-set="placeholder_count" t-value="'count_expenses'"/>
             </t>
         </xpath>
     </template>
+
+    <template id="portal_my_home_menu_expenses" name="Portal layout : expenses menu entries" inherit_id="portal.portal_breadcrumbs" priority="20">
+        <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
+            <li t-if="page_name == 'expense'" t-attf-class="breadcrumb-item #{'active ' if not expense else ''}">
+                <a t-if="expense" t-attf-href="/my/MyReimbursement/?{{ keep_query() }}">Expenses</a>
+                <t t-else="">Expenses</t>
+            </li>
+            <li t-if="expense" class="breadcrumb-item active">
+                <t t-esc="expense.name"/>
+            </li>
+        </xpath>
+    </template>
+
+    <template id="portal_all_expenses_list" name="All Expenses">
+        <t t-call="portal.portal_layout">
+            <t t-set="breadcrumbs_searchbar" t-value="True"/>
+
+            <t t-call="portal.portal_searchbar">
+                <t t-set="title">Expenses</t>
+            </t>
+            <t t-if="not expenses">
+                <p>There are currently no Expenses for your account.</p>
+            </t>
+            <t t-if="expenses" t-call="portal.portal_table">
+                <thead>
+                    <tr class="active">
+                        <th>Expense #</th>
+                        <th class="text-right">Employee Name</th>
+                        <th class="text-right">Paid By</th>
+                        <th class="text-right">Date</th>
+                        <th class="text-center">State</th>
+                        <th class="text-right">Total</th>
+                    </tr>
+                </thead>
+                <t t-foreach="expenses" t-as="expense">
+                    <tr>
+                        <td>
+                            <a t-attf-href="/my/MyReimbursement/{{ slug(expense) }}">
+                                <t t-esc="expense.name"/>
+                            </a>
+                        </td>
+                        <td class="text-right">
+                            <span t-field="expense.employee_id.name"/>
+                        </td>
+                        <td class="text-right">
+                            <span t-field="expense.payment_mode"/>
+                        </td>
+                        <td class="text-right">
+                            <span t-field="expense.date"/>
+                        </td>
+                        <td class="text-center">
+                            <span class="badge badge-pill badge-secondary">
+                                <span t-field="expense.state"/>
+                            </span>
+                        </td>
+                        <td class="text-right">
+                            <span t-field="expense.total_amount"/>
+                        </td>
+                    </tr>
+                </t>
+            </t>
+        </t>
+    </template>
+
 </odoo>

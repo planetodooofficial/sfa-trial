@@ -25,3 +25,9 @@ class GradeTitleMaster(models.Model):
     _name = 'grade.title.master'
     _rec_name = 'grade_title_line'
     grade_title_line = fields.Char('Grade Title')
+
+
+class ModeClassMaster(models.Model):
+    _name = 'mode.class.master'
+    _rec_name = 'mode_class_line'
+    mode_class_line = fields.Char('Mode and Class')

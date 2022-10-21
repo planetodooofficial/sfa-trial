@@ -98,6 +98,30 @@
         </field>
     </record>
 
+    <!-- view for Mode and Class -->
+    <record id="mode_class_master_tree_view" model="ir.ui.view">
+        <field name="name">mode.class.master.tree.view</field>
+        <field name="model">mode.class.master</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="mode_class_line"/>
+            </tree>
+        </field>
+    </record>
+    <record id="mode_class_master_form_view" model="ir.ui.view">
+        <field name="name">mode.class.master.form.view</field>
+        <field name="model">mode.class.master</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="mode_class_line"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
     <!-- action for designation -->
     <!--    <record id="action_designation_master" model="ir.actions.act_window">-->
     <!--        <field name="name">Designation</field>-->
@@ -150,6 +174,19 @@
         </field>
     </record>
 
+    <!-- action for mode and class -->
+    <record id="action_mode_class_master" model="ir.actions.act_window">
+        <field name="name">Mode and Class</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">mode.class.master</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create new Mode and Class!
+            </p>
+        </field>
+    </record>
+
     <!-- menu item for designation -->
     <!--    <menuitem id="designation_menu"-->
     <!--              name="Designation"-->
@@ -173,4 +210,10 @@
               name="Grade Title"
               parent="hr.menu_human_resources_configuration"
               action="action_grade_title_master"/>
+
+    <!-- menu item for mode and class -->
+    <menuitem id="mode_class_menu"
+              name="Mode and Class"
+              parent="hr.menu_human_resources_configuration"
+              action="action_mode_class_master"/>
 </odoo>
