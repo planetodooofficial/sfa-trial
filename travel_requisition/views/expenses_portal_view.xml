@@ -20,13 +20,55 @@
         </t>
     </template>
 
-    <!-- selected expense details template -->
-    <template id="expense_detail">
-        <t t-call="website.layout">
-            <title>Expenses</title>
-            <div class="oe_structure"/>
-            <div class="oe_structure">
-                <div class="container">
+    <!-- selected expense details template 1 -->
+    <!--    <template id="expense_detail">-->
+    <!--        <t t-call="website.layout">-->
+    <!--            <title>Expenses</title>-->
+    <!--            <div class="oe_structure"/>-->
+    <!--            <div class="oe_structure">-->
+    <!--                <div class="container">-->
+    <!--                    <h3>-->
+    <!--                        <t t-esc="expense.name"/>-->
+    <!--                    </h3>-->
+    <!--                    <li>-->
+    <!--                        <t t-esc="expense.employee_id.name"/>-->
+    <!--                    </li>-->
+    <!--                    <li>-->
+    <!--                        <t t-esc="expense.payment_mode"/>-->
+    <!--                    </li>-->
+    <!--                    <li>-->
+    <!--                        <t t-esc="expense.date"/>-->
+    <!--                    </li>-->
+    <!--                    <li>-->
+    <!--                        <t t-esc="expense.state"/>-->
+    <!--                    </li>-->
+    <!--                    <li>-->
+    <!--                        <t t-esc="expense.total_amount"/>-->
+    <!--                    </li>-->
+    <!--                </div>-->
+    <!--            </div>-->
+    <!--        </t>-->
+    <!--    </template>-->
+
+    <!-- selected expense details template 2 -->
+    <template id="expense_detail" name="My Expense">
+        <t t-call="portal.portal_layout">
+            <t t-set="o_portal_fullwidth_alert" groups="project.group_project_user">
+                <t t-call="portal.portal_back_in_edit_mode">
+                    <t t-set="backend_url"
+                       t-value="'/web#model=hr.expense&amp;id=%s&amp;view_type=form' % (expense.id)"/>
+                </t>
+            </t>
+
+            <t t-call="portal.portal_record_layout">
+                <t t-set="card_header">
+                    <h5 class="mb-0">
+                        <small class="text-muted">Expense -</small>
+                        <span t-field="expense.name"/>
+                        <span class="float-right"></span>
+                    </h5>
+                </t>
+                <t t-set="card_body">
                     <h3>
                         <t t-esc="expense.name"/>
                     </h3>
@@ -45,8 +87,8 @@
                     <li>
                         <t t-esc="expense.total_amount"/>
                     </li>
-                </div>
-            </div>
+                </t>
+            </t>
         </t>
     </template>
 
@@ -62,7 +104,8 @@
         </xpath>
     </template>
 
-    <template id="portal_my_home_menu_expenses" name="Portal layout : expenses menu entries" inherit_id="portal.portal_breadcrumbs" priority="20">
+    <template id="portal_my_home_menu_expenses" name="Portal layout : expenses menu entries"
+              inherit_id="portal.portal_breadcrumbs" priority="20">
         <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
             <li t-if="page_name == 'expense'" t-attf-class="breadcrumb-item #{'active ' if not expense else ''}">
                 <a t-if="expense" t-attf-href="/my/MyReimbursement/?{{ keep_query() }}">Expenses</a>
