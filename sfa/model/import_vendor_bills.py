@@ -152,6 +152,10 @@ class VendorBills(models.Model):
                     i.remove('CGST')
                 if 'IGST' in i:
                     i.remove('IGST')
+                if 'Voucher Ref. No.' in i:
+                    i.remove('Voucher Ref. No.')
+                if 'Voucher Ref. Date' in i:
+                    i.remove('Voucher Ref. Date')
                 print(i, 'clean data')
                 tds_values = ['TDS Payable- 194C A.Y. 2023-24', 'TDS Payable - 194J A.Y. 2023-24',
                               'TDS Payable - 194B A.Y. 2023-24', 'TDS Payable - 194I A.Y. 2023-24']
@@ -225,7 +229,7 @@ class VendorBills(models.Model):
                     'voucher_type': voucher_type,
                     'payment_reference': voucher_no,
                     'partner_id': search_customer.id,
-                    'invoice_date': supplier_invoice_date,
+                    'invoice_date': date,  # change to date supplier_invoice_date
                     'date': date,
                     'l10n_in_gst_treatment': 'regular',
                 }
