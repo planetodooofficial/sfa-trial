@@ -84,7 +84,7 @@ class TravelRequisitionExpense(models.Model):
         to_dates = fields.Date(string='To', required=True)
         departs_time = fields.Float(string='Departs Time', required=True)
         arrives_time = fields.Float(string='Arrives Time', required=True)
-        mode_and_class = fields.Char(string='Mode & Class', required=True)
+        mode_and_class = fields.Many2one('mode.class.master', string='Mode & Class', required=True)
 
     class StayDetailsLine(models.Model):
         _name = 'stay.details.line'
