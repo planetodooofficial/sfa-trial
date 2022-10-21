@@ -60,6 +60,7 @@ class ReceiptRegister(models.Model):
             date = None
             customer = False
             gstin = False
+            # date = rec.get('Date', False)
             if 'Date' in rec.keys():
                 date = rec['Date']
             if 'Particulars' in rec.keys():
@@ -73,8 +74,9 @@ class ReceiptRegister(models.Model):
             if 'GSTIN/UIN' in rec.keys():
                 gstin = rec['GSTIN/UIN']
             if 'Gross Total' in rec.keys():
-                gross_total = rec['Gross Total']
-                total = float(gross_total[:-2])
+                gross = rec['Gross Total']
+                gross_total = float(gross[:-2])
+                gross_total_sufix = gross[-2:]
             print(rec, "recccc")
             keys_list = [key for key, val in rec.items() if val]
             c.append(keys_list)
@@ -142,37 +144,65 @@ class ReceiptRegister(models.Model):
                 if not search_journal_entry:
                     journal_entry_id = search_journal_entry.sudo().create(journal_value)
 
-                    journal_value_id = (0, 0, {
+                    if gross_total_sufix == 'Cr':
+                        journal_value_id = (0, 0, {
 
-                        'account_id': account.id,
-                        'currency_id': search_currency.id,
-                        'credit': total
-                    })
-                    journal_items.append(journal_value_id)
+                            'account_id': account.id,
+                            'currency_id': search_currency.id,
+                            'credit': gross_total
+                        })
+                        journal_items.append(journal_value_id)
+                    else:
+                        journal_value_id = (0, 0, {
+
+                            'account_id': account.id,
+                            'currency_id': search_currency.id,
+                            'debit': gross_total
+                        })
+                        journal_items.append(journal_value_id)
+
                     for key in i:
                         if len(key) > 0:
                             bank = key.strip()
                             print(bank, 'bank')
                             total_value = rec[str(key)]
-                            print(total_value)
                             total_cost = float(total_value[:-2])
+                            total_cost_sufix = total_value[-2:]
+                            print(total_cost_sufix)
                             print(total_cost, 'total')
                             search_bank = self.env['account.account'].search([('name', '=', bank)])
                             if bank in ['TDS Payable- 194C A.Y. 2023-24', 'TDS Payable - 194J A.Y. 2023-24',
                                         'TDS Payable - 194B A.Y. 2023-24', 'TDS Payable - 194I A.Y. 2023-24']:
-                                journal_value_id = (0, 0, {
-                                    'account_id': search_bank.id,
-                                    'currency_id': search_currency.id,
-                                    'credit': total_cost
-                                })
-                                journal_items.append(journal_value_id)
+                                if total_cost_sufix == 'Cr':
+                                    journal_value_id = (0, 0, {
+                                        'account_id': search_bank.id,
+                                        'currency_id': search_currency.id,
+                                        'credit': total_cost
+                                    })
+                                    journal_items.append(journal_value_id)
+                                else:
+                                    journal_value_id = (0, 0, {
+                                        'account_id': search_bank.id,
+                                        'currency_id': search_currency.id,
+                                        'debit': total_cost
+                                    })
+                                    journal_items.append(journal_value_id)
+
                             else:
-                                journal_value_id = (0, 0, {
-                                    'account_id': search_bank.id,
-                                    'currency_id': search_currency.id,
-                                    'debit': total_cost
-                                })
-                                journal_items.append(journal_value_id)
+                                if total_cost_sufix == 'Cr':
+                                    journal_value_id = (0, 0, {
+                                        'account_id': search_bank.id,
+                                        'currency_id': search_currency.id,
+                                        'credit': total_cost
+                                    })
+                                    journal_items.append(journal_value_id)
+                                else:
+                                    journal_value_id = (0, 0, {
+                                        'account_id': search_bank.id,
+                                        'currency_id': search_currency.id,
+                                        'debit': total_cost
+                                    })
+                                    journal_items.append(journal_value_id)
 
                     journal_entry_id.write({'line_ids': journal_items})
                     print(journal_items, 'journal_items')
