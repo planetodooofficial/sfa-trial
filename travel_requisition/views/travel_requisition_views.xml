@@ -40,7 +40,7 @@
 
                         <group>
                             <group>
-                                <field name="purpose_of_visit"/>
+                                <field name="purpose_of_visit" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
                             </group>
                             <!--<group>-->
                             <!--<field name="approved_by"/>-->
@@ -49,7 +49,8 @@
 
                         <separator string="Travel Details" style="color:#7d435d; font-size:18px; font-weight:bold"/>
                         <group>
-                            <field name="travel_detail_line_ids" nolabel="1">
+                            <field name="travel_detail_line_ids" nolabel="1"
+                                   attrs="{'readonly': [('state', '!=', 'draft')]}">
                                 <tree editable="bottom">
                                     <field name="date" width="20%"/>
                                     <field name="from_dates" width="20%"/>
@@ -85,7 +86,8 @@
 
                         <separator string="Stay Details" style="color:#7d435d; font-size:16px; font-weight:bold"/>
                         <group>
-                            <field name="stay_detail_line_ids" nolabel="1">
+                            <field name="stay_detail_line_ids" nolabel="1"
+                                   attrs="{'readonly': [('state', '!=', 'draft')]}">
                                 <tree editable="bottom">
                                     <field name="name_line" width="20%"/>
                                     <field name="hotel_guest_line" width="20%"/>
@@ -97,6 +99,42 @@
                         </group>
                     </page>
                 </notebook>
+            </xpath>
+
+            <!-- Making Readonly fields when state is not draft -->
+            <xpath expr="//field[@name='name']" position="attributes">
+                <attribute name="attrs">{'readonly': [('state', '!=', 'draft')]}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='product_id']" position="attributes">
+                <attribute name="attrs">{'readonly': [('state', '!=', 'draft')]}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='total_amount']" position="attributes">
+                <attribute name="attrs">{'readonly': [('state', '!=', 'draft')]}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='currency_id']" position="attributes">
+                <attribute name="attrs">{'readonly': [('state', '!=', 'draft')]}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='tax_ids']" position="attributes">
+                <attribute name="attrs">{'readonly': [('state', '!=', 'draft')]}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='reference']" position="attributes">
+                <attribute name="attrs">{'readonly': [('state', '!=', 'draft')]}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='date']" position="attributes">
+                <attribute name="attrs">{'readonly': [('state', '!=', 'draft')]}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='account_id']" position="attributes">
+                <attribute name="attrs">{'readonly': [('state', '!=', 'draft')]}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='analytic_account_id']" position="attributes">
+                <attribute name="attrs">{'readonly': [('state', '!=', 'draft')]}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='analytic_tag_ids']" position="attributes">
+                <attribute name="attrs">{'readonly': [('state', '!=', 'draft')]}</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='employee_id']" position="attributes">
+                <attribute name="attrs">{'readonly': [('state', '!=', 'draft')]}</attribute>
             </xpath>
 
             <!-- filter on product_id field for show product based on menu action selected -->

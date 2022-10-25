@@ -14,7 +14,8 @@ class AllExpense(http.Controller):
             sortby = 'date'
         order = searchbar_sortings[sortby]['order']
 
-        all_expenses = http.request.env['hr.expense'].search([], order=order)
+        all_expenses = http.request.env['hr.expense'].search(
+            [('state', '=', ('draft', '', '', '', '')), ('payment_mode', '=', 'company_account')], order=order)
         return http.request.render('travel_requisition.portal_all_expenses_list', {
             'expenses': all_expenses,
             'page_name': 'expense',
