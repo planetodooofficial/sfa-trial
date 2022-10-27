@@ -84,12 +84,17 @@ class ContraVoucher(models.Model):
                 print(i, 'clean data')
                 journal_entry_id = False
                 c = []
+                if '\n' in customer:
+                    bank = customer.replace('\n', '')
+                else:
+                    bank = customer
 
                 search_journal = self.env['account.journal'].search([('name', '=', 'Receipt Register')])
                 search_journal_entry = self.env['account.move'].search(
                     [('ref', '=', voucher_no), ('journal_id', '=', search_journal.id)])
                 search_currency = self.env['res.currency'].search([('name', '=', 'INR')])
-                account = self.env['account.account'].search([('name', '=', customer)])
+                account = self.env['account.account'].search([('name', '=', customer.strip())])
+
                 journal_items = []
                 journal_value = {
                     'ref': voucher_no,
@@ -118,13 +123,17 @@ class ContraVoucher(models.Model):
                         journal_items.append(journal_value_id)
                     for key in i:
                         if len(key) > 0:
-                            bank = key
+                            # bank = key
+                            if '\n' in bank:
+                                bank = key.replace('\n', '')
+                            else:
+                                bank = key
                             print(bank, 'bank')
                             total_value = rec[str(key)]
                             total_cost = float(total_value[:-2])
                             total_cost_sufix = total_value[-2:]
 
-                            search_bank = self.env['account.account'].search([('name', '=', bank)])
+                            search_bank = self.env['account.account'].search([('name', '=', bank.strip())])
 
                             if total_cost_sufix == 'Cr':
                                 journal_value_id = (0, 0, {
