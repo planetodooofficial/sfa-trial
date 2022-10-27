@@ -184,15 +184,17 @@
                                 <td style="width:12%; text-align:right;" class="td_style">
                                     <t t-foreach="doc.line_ids" t-as="line">
                                         <t t-if="line.name =='Basic Salary'">
-                                            <t t-esc="line.total"  t-options="{'widget': 'float', 'precision': 2}"/>
+                                            <t t-esc="line.total" t-options="{'widget': 'float', 'precision': 2}"/>
                                         </t>
                                     </t>
                                 </td>
                                 <td style="width:13%; text-align:right;" class="td_style">
                                     <t t-foreach="doc.line_ids" t-as="line">
                                         <t t-if="line.name =='Basic Salary'">
-                                            <t t-set="total_earnings" t-value="total_earnings + ((line.total/30)*days)"/>
-                                            <t t-esc="((line.total/30)* days)"  t-options="{'widget': 'float', 'precision': 2}"/>
+                                            <t t-set="total_earnings"
+                                               t-value="total_earnings + ((line.total/30)*days)"/>
+                                            <t t-esc="((line.total/30)* days)"
+                                               t-options="{'widget': 'float', 'precision': 2}"/>
                                         </t>
                                     </t>
                                 </td>
@@ -200,7 +202,7 @@
                                 <td class="td_style" style="text-align:right;">
                                     <t t-foreach="doc.line_ids" t-as="line">
                                         <t t-if="line.name =='Employee\'s PF Contribution'">
-                                            <t t-esc="line.total"  t-options="{'widget': 'float', 'precision': 2}"/>
+                                            <t t-esc="line.total" t-options="{'widget': 'float', 'precision': 2}"/>
                                             <t t-set="pf" t-value="line.total"/>
                                             <t t-set="total_deductions" t-value="total_deductions + pf"/>
                                         </t>
@@ -212,15 +214,17 @@
                                 <td style="width:12%; text-align:right;" class="td_style">
                                     <t t-foreach="doc.line_ids" t-as="line">
                                         <t t-if="line.name =='House Rent Allowance'">
-                                            <t t-esc="line.total"  t-options="{'widget': 'float', 'precision': 2}"/>
+                                            <t t-esc="line.total" t-options="{'widget': 'float', 'precision': 2}"/>
                                         </t>
                                     </t>
                                 </td>
                                 <td style="width:13%; text-align:right;" class="td_style">
                                     <t t-foreach="doc.line_ids" t-as="line">
                                         <t t-if="line.name =='House Rent Allowance'">
-                                            <t t-set="total_earnings" t-value="total_earnings + ((line.total/30)*days)"/>
-                                            <t t-esc="((line.total/30)*days)"  t-options="{'widget': 'float', 'precision': 2}"/>
+                                            <t t-set="total_earnings"
+                                               t-value="total_earnings + ((line.total/30)*days)"/>
+                                            <t t-esc="((line.total/30)*days)"
+                                               t-options="{'widget': 'float', 'precision': 2}"/>
                                         </t>
                                     </t>
                                 </td>
@@ -234,15 +238,17 @@
                                 <td style="width:13%; text-align:right;" class="td_style">
                                     <t t-foreach="doc.line_ids" t-as="line">
                                         <t t-if="line.name =='Transport/Conveyance Allownace'">
-                                            <t t-esc="line.total"  t-options="{'widget': 'float', 'precision': 2}"/>
+                                            <t t-esc="line.total" t-options="{'widget': 'float', 'precision': 2}"/>
                                         </t>
                                     </t>
                                 </td>
                                 <td style="width:12%; text-align:right;" class="td_style">
                                     <t t-foreach="doc.line_ids" t-as="line">
                                         <t t-if="line.name =='Transport/Conveyance Allownace'">
-                                            <t t-set="total_earnings" t-value="total_earnings + ((line.total/30)*days)"/>
-                                            <t t-esc="((line.total/30)*days)"  t-options="{'widget': 'float', 'precision': 2}"/>
+                                            <t t-set="total_earnings"
+                                               t-value="total_earnings + ((line.total/30)*days)"/>
+                                            <t t-esc="((line.total/30)*days)"
+                                               t-options="{'widget': 'float', 'precision': 2}"/>
                                         </t>
                                     </t>
                                 </td>
@@ -250,7 +256,7 @@
                                 <td class="td_style" style="text-align:right;">
                                     <t t-foreach="doc.line_ids" t-as="line">
                                         <t t-if="line.name =='Professional Tax'">
-                                            <t t-esc="line.total"  t-options="{'widget': 'float', 'precision': 2}"/>
+                                            <t t-esc="line.total" t-options="{'widget': 'float', 'precision': 2}"/>
                                             <t t-set="prof_tax" t-value="line.total"/>
                                             <t t-set="total_deductions" t-value="total_deductions - prof_tax"/>
                                         </t>
@@ -262,15 +268,17 @@
                                 <td style="width:13%; text-align:right;" class="td_style">
                                     <t t-foreach="doc.line_ids" t-as="line">
                                         <t t-if="line.name =='Leave Travel Allowance'">
-                                            <t t-esc="line.total"  t-options="{'widget': 'float', 'precision': 2}"/>
+                                            <t t-esc="line.total" t-options="{'widget': 'float', 'precision': 2}"/>
                                         </t>
                                     </t>
                                 </td>
                                 <td style="text-align:right;" class="td_style">
                                     <t t-foreach="doc.line_ids" t-as="line">
                                         <t t-if="line.name =='Leave Travel Allowance'">
-                                            <t t-set="total_earnings" t-value="total_earnings + ((line.total/30)*days)"/>
-                                            <t t-esc="((line.total/30)*days)"  t-options="{'widget': 'float', 'precision': 2}"/>
+                                            <t t-set="total_earnings"
+                                               t-value="total_earnings + ((line.total/30)*days)"/>
+                                            <t t-esc="((line.total/30)*days)"
+                                               t-options="{'widget': 'float', 'precision': 2}"/>
                                         </t>
                                     </t>
                                 </td>
@@ -282,15 +290,17 @@
                                 <td style="width:13%; text-align:right;" class="td_style">
                                     <t t-foreach="doc.line_ids" t-as="line">
                                         <t t-if="line.name =='Special Allowance'">
-                                            <t t-esc="line.total"  t-options="{'widget': 'float', 'precision': 2}"/>
+                                            <t t-esc="line.total" t-options="{'widget': 'float', 'precision': 2}"/>
                                         </t>
                                     </t>
                                 </td>
                                 <td style="width:12%; text-align:right;" class="td_style">
                                     <t t-foreach="doc.line_ids" t-as="line">
                                         <t t-if="line.name =='Special Allowance'">
-                                            <t t-set="total_earnings" t-value="total_earnings + ((line.total/30)*days)"/>
-                                            <t t-esc="((line.total/30)*days)"  t-options="{'widget': 'float', 'precision': 2}"/>
+                                            <t t-set="total_earnings"
+                                               t-value="total_earnings + ((line.total/30)*days)"/>
+                                            <t t-esc="((line.total/30)*days)"
+                                               t-options="{'widget': 'float', 'precision': 2}"/>
                                         </t>
                                     </t>
                                 </td>
@@ -304,21 +314,45 @@
                                 <td style="width:13%; text-align:right;" class="td_style">
                                     <t t-foreach="doc.line_ids" t-as="line">
                                         <t t-if="line.name =='Choice pay'">
-                                            <t t-esc="line.total"  t-options="{'widget': 'float', 'precision': 2}"/>
+                                            <t t-esc="line.total" t-options="{'widget': 'float', 'precision': 2}"/>
                                         </t>
                                     </t>
                                 </td>
                                 <td style="width:12%; text-align:right;" class="td_style">
                                     <t t-foreach="doc.line_ids" t-as="line">
                                         <t t-if="line.name =='Choice pay'">
-                                            <t t-set="total_earnings" t-value="total_earnings + ((line.total/30)*days)"/>
-                                            <t t-esc="((line.total/30)*days)"  t-options="{'widget': 'float', 'precision': 2}"/>
+                                            <t t-set="total_earnings"
+                                               t-value="total_earnings + ((line.total/30)*days)"/>
+                                            <t t-esc="((line.total/30)*days)"
+                                               t-options="{'widget': 'float', 'precision': 2}"/>
                                         </t>
                                     </t>
                                 </td>
                                 <td class="td_style"/>
                                 <td class="td_style"/>
                             </tr>
+
+                            <!--                            <tr>-->
+                            <!--                                <td class="td_style">Gratuity</td>-->
+                            <!--                                <td style="width:13%; text-align:right;" class="td_style">-->
+                            <!--                                    <t t-foreach="doc.line_ids" t-as="line">-->
+                            <!--                                        <t t-if="line.name =='Gratuity'">-->
+                            <!--                                            <t t-esc="line.total"  t-options="{'widget': 'float', 'precision': 2}"/>-->
+                            <!--                                        </t>-->
+                            <!--                                    </t>-->
+                            <!--                                </td>-->
+                            <!--                                <td style="width:12%; text-align:right;" class="td_style">-->
+                            <!--                                    <t t-foreach="doc.line_ids" t-as="line">-->
+                            <!--                                        <t t-if="line.name =='Gratuity'">-->
+                            <!--                                            <t t-set="total_earnings" t-value="total_earnings + ((line.total/30)*days)"/>-->
+                            <!--                                            <t t-esc="((line.total/30)*days)"  t-options="{'widget': 'float', 'precision': 2}"/>-->
+                            <!--                                        </t>-->
+                            <!--                                    </t>-->
+                            <!--                                </td>-->
+                            <!--                                <td class="td_style"/>-->
+                            <!--                                <td class="td_style"/>-->
+                            <!--                            </tr>-->
+
                             <tr>
                                 <td class="td_style">Hold Salary</td>
                                 <td style="width:12%;" class="td_style"></td>
@@ -348,7 +382,7 @@
                                     <b>
                                         <t t-foreach="doc.line_ids" t-as="line">
                                             <t t-if="line.name =='Gross'">
-                                                <t t-esc="line.total"  t-options="{'widget': 'float', 'precision': 2}"/>
+                                                <t t-esc="line.total" t-options="{'widget': 'float', 'precision': 2}"/>
                                             </t>
                                         </t>
                                     </b>
@@ -357,7 +391,8 @@
                                     <b>
                                         <t t-foreach="doc.line_ids" t-as="line">
                                             <t t-if="line.name =='Gross'">
-                                                <t t-esc="total_earnings"  t-options="{'widget': 'float', 'precision': 2}"/>
+                                                <t t-esc="total_earnings"
+                                                   t-options="{'widget': 'float', 'precision': 2}"/>
                                             </t>
                                         </t>
                                     </b>
@@ -367,7 +402,7 @@
                                 </td>
                                 <td class="td_style" style="text-align:right;">
                                     <b>
-                                        <t t-esc="total_deductions"  t-options="{'widget': 'float', 'precision': 2}"/>
+                                        <t t-esc="total_deductions" t-options="{'widget': 'float', 'precision': 2}"/>
                                     </b>
                                 </td>
                             </tr>
@@ -379,7 +414,7 @@
                                     <b>
                                         <t t-foreach="doc.line_ids" t-as="line">
                                             <t t-if="line.name =='Net Salary'">
-                                                <t t-esc="line.total"  t-options="{'widget': 'float', 'precision': 2}"/>
+                                                <t t-esc="line.total" t-options="{'widget': 'float', 'precision': 2}"/>
                                             </t>
                                         </t>
                                     </b>

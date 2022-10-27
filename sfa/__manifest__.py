@@ -24,6 +24,7 @@
         "views/import_contra_voucher.xml",
         "views/import_receipt_register.xml",
         "views/accounting.xml",
+        "views/hr_payslip_change.xml",
     ],
     "assets": {
         "web.assets_backend": [
