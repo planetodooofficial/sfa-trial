@@ -89,7 +89,7 @@ class ContraVoucher(models.Model):
                 else:
                     bank = customer
 
-                search_journal = self.env['account.journal'].search([('name', '=', 'Receipt Register')])
+                search_journal = self.env['account.journal'].search([('name', '=', 'Payment Register')])
                 search_journal_entry = self.env['account.move'].search(
                     [('ref', '=', voucher_no), ('journal_id', '=', search_journal.id)])
                 search_currency = self.env['res.currency'].search([('name', '=', 'INR')])

@@ -30,7 +30,7 @@
     </record>
 
 
-    <menuitem id="menu_import" name="Import Receipt Register" sequence="8" parent="account.account_management_menu"
+    <menuitem id="menu_import" name="Import Payment Register" sequence="8" parent="account.account_management_menu"
               action="import_contra_voucher_action"/>
 
 </odoo>
