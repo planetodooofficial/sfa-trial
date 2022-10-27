@@ -19,7 +19,7 @@ class AllMyExpense(http.Controller):
              ('payment_mode', '=', 'own_account')], order=order)
         return http.request.render('travel_requisition.portal_all_my_expenses_list', {
             'my_expenses': all_my_expenses,
-            'page_name': 'expense',
+            'page_name': 'pexpense',
             'searchbar_sortings': searchbar_sortings,
             'sortby': sortby
         })
@@ -28,14 +28,14 @@ class AllMyExpense(http.Controller):
     def display_my_expense_detail(self, expense):
         return http.request.render('travel_requisition.my_expense_detail', {
             'expense': expense,
-            'page_name': 'expense',
+            'page_name': 'pexpense',
         })
 
 
 class MyExpenseCustomerPortal(CustomerPortal):
     def _prepare_home_portal_values(self, counters):
         values = super(MyExpenseCustomerPortal, self)._prepare_home_portal_values(counters)
-        count_my_expenses = http.request.env['hr.expense'].search_count(
+        count_my_expenses = request.env['hr.expense'].sudo().search_count(
             [('state', '=', ('draft', 'reported', 'approved', 'done', 'refused')),
              ('payment_mode', '=', 'own_account')])
         values.update({

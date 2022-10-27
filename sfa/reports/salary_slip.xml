@@ -332,26 +332,26 @@
                                 <td class="td_style"/>
                             </tr>
 
-                            <!--                            <tr>-->
-                            <!--                                <td class="td_style">Gratuity</td>-->
-                            <!--                                <td style="width:13%; text-align:right;" class="td_style">-->
-                            <!--                                    <t t-foreach="doc.line_ids" t-as="line">-->
-                            <!--                                        <t t-if="line.name =='Gratuity'">-->
-                            <!--                                            <t t-esc="line.total"  t-options="{'widget': 'float', 'precision': 2}"/>-->
-                            <!--                                        </t>-->
-                            <!--                                    </t>-->
-                            <!--                                </td>-->
-                            <!--                                <td style="width:12%; text-align:right;" class="td_style">-->
-                            <!--                                    <t t-foreach="doc.line_ids" t-as="line">-->
-                            <!--                                        <t t-if="line.name =='Gratuity'">-->
-                            <!--                                            <t t-set="total_earnings" t-value="total_earnings + ((line.total/30)*days)"/>-->
-                            <!--                                            <t t-esc="((line.total/30)*days)"  t-options="{'widget': 'float', 'precision': 2}"/>-->
-                            <!--                                        </t>-->
-                            <!--                                    </t>-->
-                            <!--                                </td>-->
-                            <!--                                <td class="td_style"/>-->
-                            <!--                                <td class="td_style"/>-->
-                            <!--                            </tr>-->
+                            <!-- <tr>-->
+                            <!-- <td class="td_style">Gratuity</td>-->
+                            <!-- <td style="width:13%; text-align:right;" class="td_style">-->
+                            <!-- <t t-foreach="doc.line_ids" t-as="line">-->
+                            <!-- <t t-if="line.name =='Gratuity'">-->
+                            <!-- <t t-esc="line.total"  t-options="{'widget': 'float', 'precision': 2}"/>-->
+                            <!-- </t>-->
+                            <!-- </t>-->
+                            <!-- </td>-->
+                            <!-- <td style="width:12%; text-align:right;" class="td_style">-->
+                            <!-- <t t-foreach="doc.line_ids" t-as="line">-->
+                            <!-- <t t-if="line.name =='Gratuity'">-->
+                            <!-- <t t-set="total_earnings" t-value="total_earnings + ((line.total/30)*days)"/>-->
+                            <!-- <t t-esc="((line.total/30)*days)"  t-options="{'widget': 'float', 'precision': 2}"/>-->
+                            <!-- </t>-->
+                            <!-- </t>-->
+                            <!-- </td>-->
+                            <!-- <td class="td_style"/>-->
+                            <!-- <td class="td_style"/>-->
+                            <!-- </tr>-->
 
                             <tr>
                                 <td class="td_style">Hold Salary</td>
