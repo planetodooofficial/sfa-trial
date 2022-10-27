@@ -50,8 +50,9 @@ class ContraVoucher(models.Model):
             if 'Narration' in rec.keys():
                 narration = rec['Narration']
             if 'Gross Total' in rec.keys():
-                gross_total = rec['Gross Total']
-                total = float(gross_total[:-2])
+                gross = rec['Gross Total']
+                gross_total = float(gross[:-2])
+                gross_total_sufix = gross[-2:]
             print(rec, "recccc")
             keys_list = [key for key, val in rec.items() if val]
             c.append(keys_list)
@@ -64,6 +65,14 @@ class ContraVoucher(models.Model):
                     i.remove('Date')
                 if 'Particulars' in i:
                     i.remove('Particulars')
+                if 'Address' in i:
+                    i.remove('Address')
+                if 'GSTIN/UIN' in i:
+                    i.remove('GSTIN/UIN')
+                if 'PAN No.' in i:
+                    i.remove('PAN No.')
+                if 'Voucher Ref. Date' in i:
+                    i.remove('Voucher Ref. Date')
                 if 'Voucher Type' in i:
                     i.remove('Voucher Type')
                 if 'Voucher No.' in i:
@@ -76,7 +85,7 @@ class ContraVoucher(models.Model):
                 journal_entry_id = False
                 c = []
 
-                search_journal = self.env['account.journal'].search([('name', '=', 'Contra')])
+                search_journal = self.env['account.journal'].search([('name', '=', 'Receipt Register')])
                 search_journal_entry = self.env['account.move'].search(
                     [('ref', '=', voucher_no), ('journal_id', '=', search_journal.id)])
                 search_currency = self.env['res.currency'].search([('name', '=', 'INR')])
@@ -91,26 +100,63 @@ class ContraVoucher(models.Model):
                 if not search_journal_entry:
                     journal_entry_id = search_journal_entry.sudo().create(journal_value)
 
-                    journal_value_id = (0, 0, {
-                        'account_id': account.id,
-                        'currency_id': search_currency.id,
-                        'credit': total
-                    })
-                    journal_items.append(journal_value_id)
-                    for rec in i:
-                        if len(rec) > 0:
-                            bank = rec
+                    if gross_total_sufix == 'Cr':
+                        journal_value_id = (0, 0, {
+
+                            'account_id': account.id,
+                            'currency_id': search_currency.id,
+                            'credit': gross_total
+                        })
+                        journal_items.append(journal_value_id)
+                    else:
+                        journal_value_id = (0, 0, {
+
+                            'account_id': account.id,
+                            'currency_id': search_currency.id,
+                            'debit': gross_total
+                        })
+                        journal_items.append(journal_value_id)
+                    for key in i:
+                        if len(key) > 0:
+                            bank = key
                             print(bank, 'bank')
+                            total_value = rec[str(key)]
+                            total_cost = float(total_value[:-2])
+                            total_cost_sufix = total_value[-2:]
 
                             search_bank = self.env['account.account'].search([('name', '=', bank)])
 
-                            journal_value_id = (0, 0, {
-                                'account_id': search_bank.id,
-                                'currency_id': search_currency.id,
-                                'debit': total
-                            })
-                            journal_items.append(journal_value_id)
+                            if total_cost_sufix == 'Cr':
+                                journal_value_id = (0, 0, {
+                                    'account_id': search_bank.id,
+                                    'currency_id': search_currency.id,
+                                    'credit': total_cost
+                                })
+                                journal_items.append(journal_value_id)
+                            else:
+                                journal_value_id = (0, 0, {
+                                    'account_id': search_bank.id,
+                                    'currency_id': search_currency.id,
+                                    'debit': total_cost
+                                })
+                                journal_items.append(journal_value_id)
 
-                        journal_entry_id.write({'line_ids': journal_items})
+                        else:
+                            if total_cost_sufix == 'Cr':
+                                journal_value_id = (0, 0, {
+                                    'account_id': search_bank.id,
+                                    'currency_id': search_currency.id,
+                                    'credit': total_cost
+                                })
+                                journal_items.append(journal_value_id)
+                            else:
+                                journal_value_id = (0, 0, {
+                                    'account_id': search_bank.id,
+                                    'currency_id': search_currency.id,
+                                    'debit': total_cost
+                                })
+                                journal_items.append(journal_value_id)
+
+                    journal_entry_id.write({'line_ids': journal_items})
                     print(journal_items, 'journal_items')
                     journal_entry_id.action_post()
