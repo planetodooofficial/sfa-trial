@@ -175,6 +175,9 @@
             <field name="hr_responsible_id" position="attributes">
                 <attribute name="required">0</attribute>
             </field>
+            <field name="structure_type_id" position="attributes">
+                <attribute name="required">0</attribute>
+            </field>
         </field>
     </record>
 
