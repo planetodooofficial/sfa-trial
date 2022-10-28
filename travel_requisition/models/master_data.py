@@ -11,8 +11,8 @@ class GradeMaster(models.Model):
     _name = 'grade.master'
     _rec_name = 'grade_new'
     grade_new = fields.Char(string='Grade')
-    cadre_id = fields.Many2one('cadre.master', 'cadre id')
-    grade_title_id = fields.Many2one('grade.title.master', 'grade title id')
+    cadre_id = fields.Many2one('cadre.master', 'Cadre ID')
+    grade_title_id = fields.Many2one('grade.title.master', 'Grade Title ID')
 
 
 class CadreMaster(models.Model):
