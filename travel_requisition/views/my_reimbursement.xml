@@ -146,12 +146,12 @@
     <template id="portal_my_home_menu_my_expenses" name="Portal layout : expenses menu entries"
               inherit_id="portal.portal_breadcrumbs" priority="20">
         <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
-            <li t-if="page_name == 'pexpense'" t-attf-class="breadcrumb-item #{'active ' if not pexpense else ''}">
-                <a t-if="pexpense" t-attf-href="/my/MyReimbursement/?{{ keep_query() }}">My Reimbursement</a>
+            <li t-if="page_name == 'pexpense'" t-attf-class="breadcrumb-item #{'active ' if not expense else ''}">
+                <a t-if="expense" t-attf-href="/my/MyReimbursement/?{{ keep_query() }}">My Reimbursement</a>
                 <t t-else="">My Reimbursement</t>
             </li>
-            <li t-if="pexpense" class="breadcrumb-item active">
-                <t t-esc="pexpense.name"/>
+            <li t-if="expense" class="breadcrumb-item active">
+                <t t-esc="expense.name"/>
             </li>
         </xpath>
     </template>
