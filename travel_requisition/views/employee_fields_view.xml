@@ -43,7 +43,7 @@
 
             <xpath expr="//field[@name='passport_id']" position="after">
                 <label for="emp_pass_issue_date" string="Date &amp; Place of Issue"/>
-<!--                <h6>Date &amp; Place of Issue</h6>-->
+                <!--                <h6>Date &amp; Place of Issue</h6>-->
                 <div class="o_row">
                     <field name="emp_pass_issue_date" nolabel="1"/>
                     <field name="emp_pass_issue_loc" nolabel="1"/>
@@ -98,7 +98,6 @@
                             <field name="emp_state_id"/>
                         </group>
                         <group string="Document Details">
-                            <field name="new_aadhar_no"/>
                             <field name="new_pf_account_no"/>
                         </group>
                     </group>
@@ -173,7 +172,9 @@
                     </group>
                 </page>
             </xpath>
-
+            <field name="hr_responsible_id" position="attributes">
+                <attribute name="required">0</attribute>
+            </field>
         </field>
     </record>
 
@@ -194,4 +195,14 @@
         </field>
     </record>
 
+    <record id="view_hr_employee_l10n_inherite_view" model="ir.ui.view">
+        <field name="name">view.hr.employee.l10n.inherite.view</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="l10n_in_hr_payroll.hr_employee_view_form_in_inherit"/>
+        <field name="arch" type="xml">
+            <field name="pan" position="after">
+                <field name="new_aadhar_no"/>
+            </field>
+        </field>
+    </record>
 </odoo>
