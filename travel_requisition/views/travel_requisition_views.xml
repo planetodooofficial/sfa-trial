@@ -40,7 +40,9 @@
 
                         <group>
                             <group>
-                                <field name="purpose_of_visit" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                <!-- field readonly and required based on condition using attrs -->
+                                <field name="purpose_of_visit"
+                                       attrs="{'readonly': [('state', '!=', 'draft')],'required':[('travel_requisition_opt','=',True)]}"/>
                             </group>
                             <!--<group>-->
                             <!--<field name="approved_by"/>-->

@@ -12,7 +12,7 @@ class TravelRequisitionExpense(models.Model):
     designation = fields.Char(string='Designation', related='employee_id.job_title', store=True)
     department = fields.Char(string='Department', related='employee_id.department_id.name', store=True)
     company = fields.Char(string='Company', related='employee_id.company_id.name', store=True)
-    purpose_of_visit = fields.Text(string='Purpose of Visit', required=True)
+    purpose_of_visit = fields.Text(string='Purpose of Visit')
     pan_no_new = fields.Char(string='Pan Card Number', related='employee_id.pan', store=True)
     dl_number = fields.Char(string='Driving License Number', related='employee_id.dl_no', store=True)
     age = fields.Char(string='Age', related='employee_id.age', store=True)

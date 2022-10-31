@@ -8,10 +8,10 @@
             <div class="oe_structure"/>
             <div class="oe_structure">
                 <div class="container">
-                    <t t-foreach="my_expenses" t-as="expense">
+                    <t t-foreach="my_expenses" t-as="rexpense">
                         <p>
-                            <a t-attf-href="/my/MyReimbursement/{{ slug(expense) }}">
-                                <t t-esc="expense.name"/>
+                            <a t-attf-href="/my/MyReimbursement/{{ slug(rexpense) }}">
+                                <t t-esc="rexpense.name"/>
                             </a>
                         </p>
                     </t>
@@ -56,7 +56,7 @@
             <t t-set="o_portal_fullwidth_alert" groups="project.group_project_user">
                 <t t-call="portal.portal_back_in_edit_mode">
                     <t t-set="backend_url"
-                       t-value="'/web#model=hr.expense&amp;id=%s&amp;view_type=form' % (expense.id)"/>
+                       t-value="'/web#model=hr.expense&amp;id=%s&amp;view_type=form' % (rexpense.id)"/>
                 </t>
             </t>
 
@@ -64,7 +64,7 @@
                 <t t-set="card_header">
                     <h5 class="mb-0">
                         <small class="text-muted">My Reimbursement -</small>
-                        <span t-field="expense.name"/>
+                        <span t-field="rexpense.name"/>
                         <span class="float-right"></span>
                     </h5>
                 </t>
@@ -82,13 +82,13 @@
                                 <br/>
                             </div>
                             <div class="col-lg-3">
-                                <t t-esc="expense.name"/>
+                                <t t-esc="rexpense.name"/>
                                 <br/>
-                                <t t-esc="expense.product_id.name"/>
+                                <t t-esc="rexpense.product_id.name"/>
                                 <br/>
-                                <t t-esc="expense.total_amount"/>
+                                <t t-esc="rexpense.total_amount"/>
                                 <br/>
-                                <t t-esc="expense.tax_ids.name"/>
+                                <t t-esc="rexpense.tax_ids.name"/>
                                 <br/>
                             </div>
 
@@ -109,19 +109,19 @@
                                 <br/>
                             </div>
                             <div class="col-lg-3">
-                                <t t-esc="expense.reference"/>
+                                <t t-esc="rexpense.reference"/>
                                 <br/>
-                                <t t-esc="expense.date"/>
+                                <t t-esc="rexpense.date"/>
                                 <br/>
-                                <t t-esc="expense.account_id.name"/>
+                                <t t-esc="rexpense.account_id.name"/>
                                 <br/>
-                                <t t-esc="expense.analytic_account_id.name"/>
+                                <t t-esc="rexpense.analytic_account_id.name"/>
                                 <br/>
-                                <t t-esc="expense.analytic_tag_ids.name"/>
+                                <t t-esc="rexpense.analytic_tag_ids.name"/>
                                 <br/>
-                                <t t-esc="expense.employee_id.name"/>
+                                <t t-esc="rexpense.employee_id.name"/>
                                 <br/>
-                                <t t-esc="expense.payment_mode"/>
+                                <t t-esc="rexpense.payment_mode"/>
                                 <br/>
                             </div>
                         </div>
@@ -146,12 +146,12 @@
     <template id="portal_my_home_menu_my_expenses" name="Portal layout : expenses menu entries"
               inherit_id="portal.portal_breadcrumbs" priority="20">
         <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
-            <li t-if="page_name == 'pexpense'" t-attf-class="breadcrumb-item #{'active ' if not expense else ''}">
-                <a t-if="expense" t-attf-href="/my/MyReimbursement/?{{ keep_query() }}">My Reimbursement</a>
+            <li t-if="page_name == 'pexpense'" t-attf-class="breadcrumb-item #{'active ' if not rexpense else ''}">
+                <a t-if="rexpense" t-attf-href="/my/MyReimbursement/?{{ keep_query() }}">My Reimbursement</a>
                 <t t-else="">My Reimbursement</t>
             </li>
-            <li t-if="expense" class="breadcrumb-item active">
-                <t t-esc="expense.name"/>
+            <li t-if="rexpense" class="breadcrumb-item active">
+                <t t-esc="rexpense.name"/>
             </li>
         </xpath>
     </template>
@@ -177,29 +177,29 @@
                         <th class="text-right">Total</th>
                     </tr>
                 </thead>
-                <t t-foreach="my_expenses" t-as="expense">
+                <t t-foreach="my_expenses" t-as="rexpense">
                     <tr>
                         <td>
-                            <a t-attf-href="/my/MyReimbursement/{{ slug(expense) }}">
-                                <t t-esc="expense.name"/>
+                            <a t-attf-href="/my/MyReimbursement/{{ slug(rexpense) }}">
+                                <t t-esc="rexpense.name"/>
                             </a>
                         </td>
                         <td class="text-right">
-                            <span t-field="expense.employee_id.name"/>
+                            <span t-field="rexpense.employee_id.name"/>
                         </td>
                         <td class="text-right">
-                            <span t-field="expense.payment_mode"/>
+                            <span t-field="rexpense.payment_mode"/>
                         </td>
                         <td class="text-right">
-                            <span t-field="expense.date"/>
+                            <span t-field="rexpense.date"/>
                         </td>
                         <td class="text-center">
                             <span class="badge badge-pill badge-secondary">
-                                <span t-field="expense.state"/>
+                                <span t-field="rexpense.state"/>
                             </span>
                         </td>
                         <td class="text-right">
-                            <span t-field="expense.total_amount"/>
+                            <span t-field="rexpense.total_amount"/>
                         </td>
                     </tr>
                 </t>

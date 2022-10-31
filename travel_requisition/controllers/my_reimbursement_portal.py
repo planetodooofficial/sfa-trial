@@ -24,10 +24,10 @@ class AllMyExpense(http.Controller):
             'sortby': sortby
         })
 
-    @http.route('/my/MyReimbursement/<model("hr.expense"):expense>', auth='public', website=True)
-    def display_my_expense_detail(self, expense):
+    @http.route('/my/MyReimbursement/<model("hr.expense"):rexpense>', auth='public', website=True)
+    def display_my_expense_detail(self, rexpense):
         return http.request.render('travel_requisition.my_expense_detail', {
-            'expense': expense,
+            'rexpense': rexpense,
             'page_name': 'pexpense',
         })
 

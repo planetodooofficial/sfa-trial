@@ -13,7 +13,7 @@
         'views/expenses_portal_view.xml',
         'views/employee_fields_view.xml',
         'views/master_data.xml',
-        'views/my_reimbursement.xml'
+        'views/my_reimbursement_portal_view.xml'
     ],
     'demo': [],
     'qweb': [],
