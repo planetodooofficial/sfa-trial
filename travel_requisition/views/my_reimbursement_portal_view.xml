@@ -121,7 +121,12 @@
                                 <br/>
                                 <t t-esc="rexpense.employee_id.name"/>
                                 <br/>
-                                <t t-esc="rexpense.payment_mode"/>
+                                <t t-if="rexpense.payment_mode == 'company_account'">
+                                    <spam>Company</spam>
+                                </t>
+                                <t t-else="expense.payment_mode == 'own_account'">
+                                    <spam>Employee (to reimburse)</spam>
+                                </t>
                                 <br/>
                             </div>
                         </div>
@@ -188,7 +193,7 @@
                             <span t-field="rexpense.employee_id.name"/>
                         </td>
                         <td class="text-right">
-                            <span t-field="rexpense.payment_mode"/>
+                            <span t-att-value="rexpense.payment_mode"/>
                         </td>
                         <td class="text-right">
                             <span t-field="rexpense.date"/>

@@ -121,7 +121,12 @@
                                 <br/>
                                 <t t-esc="expense.employee_id.name"/>
                                 <br/>
-                                <t t-esc="expense.payment_mode"/>
+                                <t t-if="expense.payment_mode == 'company_account'">
+                                    <spam>Company</spam>
+                                </t>
+                                <t t-else="expense.payment_mode == 'own_account'">
+                                    <spam>Employee (to reimburse)</spam>
+                                </t>
                                 <br/>
                             </div>
                         </div>
