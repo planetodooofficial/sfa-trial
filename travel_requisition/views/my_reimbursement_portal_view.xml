@@ -164,10 +164,14 @@
     <template id="portal_all_my_expenses_list" name="All My Expenses">
         <t t-call="portal.portal_layout">
             <t t-set="breadcrumbs_searchbar" t-value="True"/>
-
             <t t-call="portal.portal_searchbar">
                 <t t-set="title">My Reimbursement</t>
             </t>
+
+            <!-- create button-->
+            <form action="/create/MyReimbursement">
+                <button class="btn btn-primary" role="submit">create</button>
+            </form>
             <t t-if="not my_expenses">
                 <p>There are currently no Reimbursement for your account.</p>
             </t>
@@ -193,7 +197,7 @@
                             <span t-field="rexpense.employee_id.name"/>
                         </td>
                         <td class="text-right">
-                            <span t-att-value="rexpense.payment_mode"/>
+                            <span t-field="rexpense.payment_mode"/>
                         </td>
                         <td class="text-right">
                             <span t-field="rexpense.date"/>
@@ -210,6 +214,186 @@
                 </t>
             </t>
         </t>
+    </template>
+
+    <!-- create form from odoo portal -->
+    <template id="create_my_reimbursement" name="My Reimbursement">
+        <xpath expr="//head" position="inside">
+            <script type="text/javascript" src="/travel_requisition/static/src/js/portal.js" charset="UTF-8" async="1"/>
+        </xpath>
+        <div class="oe_structure">
+            <form role="form" action="/create/MyReimbursement" method="POST"
+                  enctype="multipart/form-data">
+                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                <t t-call="portal.portal_layout">
+                    <t t-call="portal.portal_record_layout">
+                        <t t-set="card_header">
+                            <center>
+                                <h2>
+                                    <small class="text-muted">My Reimbursement Form</small>
+                                </h2>
+                            </center>
+                        </t>
+
+                        <t t-set="card_body">
+                            <div class="container">
+                                <div class="row justify-content-md-center">
+                                    <table>
+                                        <tr>
+                                            <td style="width:150px">
+                                                <b>Expense Name</b>
+                                            </td>
+                                            <td style="width:300px">
+                                                <input type="text" id="expname" name="expname"/>
+                                            </td>
+                                            <td style="width:150px">
+                                                <b>Bill Reference</b>
+                                            </td>
+                                            <td style="width:300px">
+                                                <input type="text" id="ref" name="ref"/>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <b>Product</b>
+                                            </td>
+                                            <td>
+                                                <select id="r_product" name="r_product">
+                                                    <option></option>
+                                                    <t t-foreach="r_product" t-as="prod">
+                                                        <option t-att-value="prod.id">
+                                                            <t t-esc="prod.name"/>
+                                                        </option>
+                                                    </t>
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <b>Expense Date</b>
+                                            </td>
+                                            <td>
+                                                <!-- <t t-set="curdate" t-value="date.today().strftime('%d/%m/%Y')"/>-->
+                                                <input type="date" id="cdate" name="cdate" t-att-value="cdate"/>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <b>Total Amount</b>
+                                            </td>
+                                            <td>
+                                                <input type="text" id="total_amount" name="total_amount"/>
+                                                <span>
+                                                    <select id="currency_name" name="currency_name">
+                                                        <t t-foreach="currency_name" t-as="currency_name">
+                                                            <option t-att-value="currency_name.id">
+                                                                <t t-esc="currency_name.name"/>
+                                                            </option>
+                                                        </t>
+                                                    </select>
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <b>Account</b>
+                                            </td>
+                                            <td>
+                                                <select id="account_id" name="account_id">
+                                                    <option></option>
+                                                    <t t-foreach="account_id" t-as="accid">
+                                                        <option t-att-value="accid.id">
+                                                            <t t-esc="accid.name"/>
+                                                        </option>
+                                                    </t>
+                                                </select>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <b>Taxes</b>
+                                            </td>
+                                            <td>
+                                                <select id="tax_name" name="tax_name">
+                                                    <option></option>
+                                                    <t t-foreach="tax_name" t-as="taxn">
+                                                        <option t-att-value="taxn.id">
+                                                            <t t-esc="taxn.name"/>
+                                                        </option>
+                                                    </t>
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <b>Analytic Account</b>
+                                            </td>
+                                            <td>
+                                                <select id="analytic_account" name="analytic_account">
+                                                    <option></option>
+                                                    <t t-foreach="analytic_account" t-as="acc">
+                                                        <option t-att-value="acc.id">
+                                                            <t t-esc="acc.name"/>
+                                                        </option>
+                                                    </t>
+                                                </select>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td>
+                                                <b>Analytic Tags</b>
+                                            </td>
+                                            <td>
+                                                <select id="analytic_account_tag" name="analytic_account_tag">
+                                                    <option></option>
+                                                    <t t-foreach="analytic_account_tag" t-as="tag">
+                                                        <option t-att-value="tag.id">
+                                                            <t t-esc="tag.name"/>
+                                                        </option>
+                                                    </t>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td>
+                                                <b>Employee</b>
+                                            </td>
+                                            <td>
+                                                <input type="text" id="name" name="name" t-att-value="user.name"
+                                                       readonly="1"/>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td>
+                                                <b>Paid By</b>
+                                            </td>
+                                            <td>
+                                                <t t-if="paid_id.payment_mode == 'company_account'">
+                                                    <input type="text" id="paid_id" name="paid_id" value="Company"
+                                                           readonly="1"/>
+                                                </t>
+                                                <t t-else="paid_id.payment_mode == 'own_account'">
+                                                    <input type="text" id="paid_id" name="paid_id"
+                                                           value="Employee (to reimburse)" readonly="1"/>
+                                                </t>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <button id="submit" type="submit" class="btn btn-outline-secondary btn-block">
+                                        Submit
+                                    </button>
+                                </div>
+                            </div>
+                        </t>
+                    </t>
+                </t>
+            </form>
+        </div>
     </template>
 
 </odoo>
