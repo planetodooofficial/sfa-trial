@@ -65,11 +65,31 @@ class AllMyExpense(http.Controller):
         }
         if kw:
 
-            tax_ids = int(kw.get('tax_name'))
-            product_name = int(kw.get('r_product'))
-            accountid = int(kw.get('account_id'))
-            analytic_acc = int(kw.get('analytic_account'))
-            analytic_tagid = int(kw.get('analytic_account_tag'))
+            if kw.get('tax_name'):
+                tax_ids = int(kw.get('tax_name'))
+            else:
+                tax_ids = None
+
+            if kw.get('r_product'):
+                product_name = int(kw.get('r_product'))
+            else:
+                product_name = None
+
+            if kw.get('account_id'):
+                accountid = int(kw.get('account_id'))
+            else:
+                accountid = None
+
+            if kw.get('analytic_account'):
+                analytic_acc = int(kw.get('analytic_account'))
+            else:
+                analytic_acc = None
+
+            if kw.get('analytic_account_tag'):
+                analytic_tagid = int(kw.get('analytic_account_tag'))
+            else:
+                analytic_tagid = None
+
             vals = {
                 'name': kw.get('expname'),
                 'product_id': product_name,
