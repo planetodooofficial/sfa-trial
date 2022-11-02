@@ -216,7 +216,7 @@
         </t>
     </template>
 
-    <!-- create form My Reimbursement from odoo portal -->
+    <!-- My Reimbursement form to create record in odoo portal -->
     <template id="create_my_reimbursement" name="My Reimbursement">
         <xpath expr="//head" position="inside">
             <script type="text/javascript" src="/travel_requisition/static/src/js/portal.js" charset="UTF-8" async="1"/>
@@ -245,13 +245,13 @@
                                                 <b>Expense Name</b>
                                             </td>
                                             <td style="width:300px">
-                                                <input type="text" id="expname" name="expname" style="width:210px;"/>
+                                                <input type="text" id="expname" name="expname" style="width:210px;" required="1"/>
                                             </td>
                                             <td style="width:150px">
                                                 <b>Bill Reference</b>
                                             </td>
                                             <td style="width:300px">
-                                                <input type="text" id="ref" name="ref" style="width:210px;"/>
+                                                <input type="text" id="ref" name="ref" style="width:210px;" required="1"/>
                                             </td>
                                         </tr>
 
