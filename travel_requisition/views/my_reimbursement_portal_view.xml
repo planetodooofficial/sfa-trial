@@ -225,6 +225,7 @@
             <form role="form" action="/create/MyReimbursement" method="POST"
                   enctype="multipart/form-data">
                 <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+
                 <t t-call="portal.portal_layout">
                     <t t-call="portal.portal_record_layout">
                         <t t-set="card_header">
@@ -244,13 +245,13 @@
                                                 <b>Expense Name</b>
                                             </td>
                                             <td style="width:300px">
-                                                <input type="text" id="expname" name="expname"/>
+                                                <input type="text" id="expname" name="expname" style="width:210px;"/>
                                             </td>
                                             <td style="width:150px">
                                                 <b>Bill Reference</b>
                                             </td>
                                             <td style="width:300px">
-                                                <input type="text" id="ref" name="ref"/>
+                                                <input type="text" id="ref" name="ref" style="width:210px;"/>
                                             </td>
                                         </tr>
 
@@ -260,7 +261,7 @@
                                             </td>
                                             <td>
                                                 <!-- getting products from Many 2 one field-->
-                                                <select id="r_product" name="r_product">
+                                                <select id="r_product" name="r_product" style="width:210px;">
                                                     <option></option>
                                                     <t t-foreach="r_product" t-as="prod">
                                                         <option t-att-value="prod.id">
@@ -274,7 +275,8 @@
                                             </td>
                                             <td>
                                                 <!-- <t t-set="curdate" t-value="date.today().strftime('%d/%m/%Y')"/>-->
-                                                <input type="date" id="cdate" name="cdate" t-att-value="cdate"/>
+                                                <input type="date" id="cdate" name="cdate" t-att-value="cdate"
+                                                       style="width:210px;"/>
                                             </td>
                                         </tr>
 
@@ -283,7 +285,8 @@
                                                 <b>Total Amount</b>
                                             </td>
                                             <td>
-                                                <input type="text" id="total_amount" name="total_amount"/>
+                                                <input type="text" id="total_amount" name="total_amount"
+                                                       style="width:210px;"/>
                                                 <span>
                                                     <!-- getting currency from Many 2 one field-->
                                                     <select id="currency_name" name="currency_name">
@@ -300,7 +303,7 @@
                                             </td>
                                             <td>
                                                 <!-- getting account from Many 2 one field-->
-                                                <select id="account_id" name="account_id">
+                                                <select id="account_id" name="account_id" style="width:210px;">
                                                     <!-- show only default account select into many 2 one-->
                                                     <option t-att-value="account_id_def.id">
                                                         <t t-esc="account_id_def.name"/>
@@ -321,7 +324,7 @@
                                             </td>
                                             <td>
                                                 <!-- getting taxes from Many 2 many field-->
-                                                <select id="tax_name" name="tax_name">
+                                                <select id="tax_name" name="tax_name" style="width:210px;">
                                                     <option></option>
                                                     <t t-foreach="tax_name" t-as="taxn">
                                                         <option t-att-value="taxn.id">
@@ -335,7 +338,8 @@
                                             </td>
                                             <td>
                                                 <!-- getting Analytic Account from Many 2 one field-->
-                                                <select id="analytic_account" name="analytic_account">
+                                                <select id="analytic_account" name="analytic_account"
+                                                        style="width:210px;">
                                                     <option></option>
                                                     <t t-foreach="analytic_account" t-as="acc">
                                                         <option t-att-value="acc.id">
@@ -354,7 +358,8 @@
                                             </td>
                                             <td>
                                                 <!-- getting Analytic Account from Many 2 Many field-->
-                                                <select id="analytic_account_tag" name="analytic_account_tag">
+                                                <select id="analytic_account_tag" name="analytic_account_tag"
+                                                        style="width:210px;">
                                                     <option></option>
                                                     <t t-foreach="analytic_account_tag" t-as="tag">
                                                         <option t-att-value="tag.id">
@@ -372,7 +377,7 @@
                                             </td>
                                             <td>
                                                 <input type="text" id="name" name="name" t-att-value="user.name"
-                                                       readonly="1"/>
+                                                       readonly="1" style="width:210px;"/>
                                             </td>
                                         </tr>
 
@@ -386,17 +391,19 @@
                                                 <!-- getting Paid By from radio button field-->
                                                 <t t-if="paid_id.payment_mode == 'company_account'">
                                                     <input type="text" id="paid_id" name="paid_id" value="Company"
-                                                           readonly="1"/>
+                                                           readonly="1" style="width:210px;"/>
                                                 </t>
                                                 <t t-else="paid_id.payment_mode == 'own_account'">
                                                     <input type="text" id="paid_id" name="paid_id"
-                                                           value="Employee (to reimburse)" readonly="1"/>
+                                                           value="Employee (to reimburse)" readonly="1"
+                                                           style="width:210px;"/>
                                                 </t>
                                             </td>
                                         </tr>
                                     </table>
                                     <!-- submit button -->
-                                    <button id="submit" type="submit" class="btn btn-outline-secondary btn-block">
+                                    <button id="submit" type="submit" class="btn btn-outline-secondary btn-block mt-3"
+                                            style="width:210px;">
                                         Submit
                                     </button>
                                 </div>
