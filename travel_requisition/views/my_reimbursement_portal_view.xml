@@ -168,10 +168,11 @@
                 <t t-set="title">My Reimbursement</t>
             </t>
 
-            <!-- create button-->
+            <!-- create button for my reimbursement-->
             <form action="/create/MyReimbursement">
                 <button class="btn btn-primary" role="submit">create</button>
             </form>
+
             <t t-if="not my_expenses">
                 <p>There are currently no Reimbursement for your account.</p>
             </t>
@@ -245,13 +246,15 @@
                                                 <b>Expense Name</b>
                                             </td>
                                             <td style="width:300px">
-                                                <input type="text" id="expname" name="expname" style="width:210px;" required="1"/>
+                                                <input type="text" id="expname" name="expname" style="width:210px;"
+                                                       required="1"/>
                                             </td>
                                             <td style="width:150px">
                                                 <b>Bill Reference</b>
                                             </td>
                                             <td style="width:300px">
-                                                <input type="text" id="ref" name="ref" style="width:210px;" required="1"/>
+                                                <input type="text" id="ref" name="ref" style="width:210px;"
+                                                       required="1"/>
                                             </td>
                                         </tr>
 
@@ -261,7 +264,7 @@
                                             </td>
                                             <td>
                                                 <!-- getting products from Many 2 one field-->
-                                                <select id="r_product" name="r_product" style="width:210px;">
+                                                <select id="r_product" name="r_product" style="width:210px;" required="1">
                                                     <option></option>
                                                     <t t-foreach="r_product" t-as="prod">
                                                         <option t-att-value="prod.id">
@@ -389,15 +392,19 @@
                                             </td>
                                             <td>
                                                 <!-- getting Paid By from radio button field-->
-                                                <t t-if="paid_id.payment_mode == 'company_account'">
-                                                    <input type="text" id="paid_id" name="paid_id" value="Company"
-                                                           readonly="1" style="width:210px;"/>
-                                                </t>
-                                                <t t-else="paid_id.payment_mode == 'own_account'">
-                                                    <input type="text" id="paid_id" name="paid_id"
-                                                           value="Employee (to reimburse)" readonly="1"
-                                                           style="width:210px;"/>
-                                                </t>
+                                                <select name="payment_mode" readonly="1" disabled="1">
+                                                    <option t-att-value="own_account" selected="1">Employee (to reimburse)</option>
+                                                    <option t-att-value="company_account">Company</option>
+                                                </select>
+                                                <!--                                                <t t-if="paid_id.payment_mode == 'company_account'">-->
+                                                <!--                                                    <input type="text" id="paid_id" name="paid_id" value="Company"-->
+                                                <!--                                                           readonly="1" style="width:210px;"/>-->
+                                                <!--                                                </t>-->
+                                                <!--                                                <t t-else="paid_id.payment_mode == 'own_account'">-->
+                                                <!--                                                    <input type="text" id="paid_id" name="paid_id"-->
+                                                <!--                                                           value="Employee (to reimburse)" readonly="1"-->
+                                                <!--                                                           style="width:210px;"/>-->
+                                                <!--                                                </t>-->
                                             </td>
                                         </tr>
                                     </table>

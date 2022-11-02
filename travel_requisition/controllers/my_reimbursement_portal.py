@@ -64,7 +64,7 @@ class AllMyExpense(http.Controller):
         analytic_account_tag = request.env['account.analytic.tag'].sudo().search([])
 
         # get field for getting paid by value
-        paid_id = request.env['hr.expense']
+        # paid_id = request.env['hr.expense']
 
         autofill_data = {
             # 'module_fields_name' : defined_fields_name
@@ -77,7 +77,7 @@ class AllMyExpense(http.Controller):
             'analytic_account_tag': analytic_account_tag,
             'account_id': account_id,
             'account_id_def': account_id_def,
-            'paid_id': paid_id,
+            # 'paid_id': paid_id,
         }
         if kw:
 
@@ -129,6 +129,8 @@ class AllMyExpense(http.Controller):
 
                 # don't know about this field, this field shows mandatory therefore i pass 1
                 'unit_amount': 1,
+                'payment_mode': 'own_account'
+                # 'payment_mode': 'own_account' if kw.get('payment_mode') == 'own_account' else 'own_account'
             }
 
             # create method override to create record from form

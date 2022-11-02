@@ -387,10 +387,15 @@
     <template id="portal_all_expenses_list" name="All Expenses">
         <t t-call="portal.portal_layout">
             <t t-set="breadcrumbs_searchbar" t-value="True"/>
-
             <t t-call="portal.portal_searchbar">
                 <t t-set="title">Travel Requisition</t>
             </t>
+
+            <!-- create button for travel requisition-->
+            <form action="/create/TravelRequisition">
+                <button class="btn btn-primary" role="submit">create</button>
+            </form>
+
             <t t-if="not expenses">
                 <p>There are currently no Reimbursement for your account.</p>
             </t>
@@ -433,6 +438,211 @@
                 </t>
             </t>
         </t>
+    </template>
+
+    <!-- My Reimbursement form to create record in odoo portal -->
+    <template id="create_travel_requisition" name="Travel Requisition">
+        <xpath expr="//head" position="inside">
+            <script type="text/javascript" src="/travel_requisition/static/src/js/portal.js" charset="UTF-8" async="1"/>
+        </xpath>
+        <div class="oe_structure">
+            <form role="form" action="/create/TravelRequisition" method="POST"
+                  enctype="multipart/form-data">
+                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+
+                <t t-call="portal.portal_layout">
+                    <t t-call="portal.portal_record_layout">
+                        <t t-set="card_header">
+                            <center>
+                                <h2>
+                                    <small class="text-muted">Travel Requisition Form</small>
+                                </h2>
+                            </center>
+                        </t>
+
+                        <t t-set="card_body">
+                            <div class="container">
+                                <div class="row justify-content-md-center">
+                                    <table>
+                                        <tr>
+                                            <td style="width:150px">
+                                                <b>Expense Name</b>
+                                            </td>
+                                            <td style="width:300px">
+                                                <input type="text" id="t_expname" name="t_expname" style="width:210px;"
+                                                       required="1"/>
+                                            </td>
+                                            <td style="width:150px">
+                                                <b>Bill Reference</b>
+                                            </td>
+                                            <td style="width:300px">
+                                                <input type="text" id="t_ref" name="t_ref" style="width:210px;"
+                                                       required="1"/>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <b>Product</b>
+                                            </td>
+                                            <td>
+                                                <!-- getting products from Many 2 one field-->
+                                                <select id="t_product" name="t_product" style="width:210px;" required="1">
+                                                    <option></option>
+                                                    <t t-foreach="t_product" t-as="tprod">
+                                                        <option t-att-value="tprod.id">
+                                                            <t t-esc="tprod.name"/>
+                                                        </option>
+                                                    </t>
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <b>Expense Date</b>
+                                            </td>
+                                            <td>
+                                                <!-- <t t-set="curdate" t-value="date.today().strftime('%d/%m/%Y')"/>-->
+                                                <input type="date" id="cdate" name="cdate" t-att-value="cdate"
+                                                       style="width:210px;"/>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <b>Total Amount</b>
+                                            </td>
+                                            <td>
+                                                <input type="text" id="t_total_amount" name="t_total_amount"
+                                                       style="width:210px;"/>
+                                                <span>
+                                                    <!-- getting currency from Many 2 one field-->
+                                                    <select id="t_currency_name" name="t_currency_name">
+                                                        <t t-foreach="t_currency_name" t-as="t_currency_name">
+                                                            <option t-att-value="t_currency_name.id">
+                                                                <t t-esc="t_currency_name.name"/>
+                                                            </option>
+                                                        </t>
+                                                    </select>
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <b>Account</b>
+                                            </td>
+                                            <td>
+                                                <!-- getting account from Many 2 one field-->
+                                                <select id="t_account_id" name="t_account_id" style="width:210px;">
+                                                    <!-- show only default account select into many 2 one-->
+                                                    <option t-att-value="t_account_id_def.id">
+                                                        <t t-esc="t_account_id_def.name"/>
+                                                    </option>
+                                                    <!-- show all account list -->
+                                                    <t t-foreach="t_account_id" t-as="taccid">
+                                                        <option t-att-value="taccid.id">
+                                                            <t t-esc="taccid.name"/>
+                                                        </option>
+                                                    </t>
+                                                </select>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <b>Taxes</b>
+                                            </td>
+                                            <td>
+                                                <!-- getting taxes from Many 2 many field-->
+                                                <select id="t_tax_name" name="t_tax_name" style="width:210px;">
+                                                    <option></option>
+                                                    <t t-foreach="t_tax_name" t-as="ttaxn">
+                                                        <option t-att-value="ttaxn.id">
+                                                            <t t-esc="ttaxn.name"/>
+                                                        </option>
+                                                    </t>
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <b>Analytic Account</b>
+                                            </td>
+                                            <td>
+                                                <!-- getting Analytic Account from Many 2 one field-->
+                                                <select id="t_analytic_account" name="t_analytic_account"
+                                                        style="width:210px;">
+                                                    <option></option>
+                                                    <t t-foreach="t_analytic_account" t-as="tacc">
+                                                        <option t-att-value="tacc.id">
+                                                            <t t-esc="tacc.name"/>
+                                                        </option>
+                                                    </t>
+                                                </select>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td>
+                                                <b>Analytic Tags</b>
+                                            </td>
+                                            <td>
+                                                <!-- getting Analytic Account from Many 2 Many field-->
+                                                <select id="t_analytic_account_tag" name="t_analytic_account_tag"
+                                                        style="width:210px;">
+                                                    <option></option>
+                                                    <t t-foreach="t_analytic_account_tag" t-as="ttag">
+                                                        <option t-att-value="ttag.id">
+                                                            <t t-esc="ttag.name"/>
+                                                        </option>
+                                                    </t>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td>
+                                                <b>Employee</b>
+                                            </td>
+                                            <td>
+                                                <input type="text" id="t_name" name="t_name" t-att-value="user.name"
+                                                       readonly="1" style="width:210px;"/>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td>
+                                                <b>Paid By</b>
+                                            </td>
+                                            <td>
+                                                <!-- getting Paid By from radio button field-->
+                                                <select name="payment_mode" readonly="1" disabled="1">
+                                                    <option value="own_account">Employee (to reimburse)</option>
+                                                    <option value="company_account" selected="1">Company</option>
+                                                </select>
+                                                <!--                                                <t t-if="t_paid_id.payment_mode == 'company_account'">-->
+                                                <!--                                                    <input type="text" id="t_paid_id" name="t_paid_id" value="Company"-->
+                                                <!--                                                           readonly="1" style="width:210px;"/>-->
+                                                <!--                                                </t>-->
+                                                <!--                                                <t t-else="t_paid_id.payment_mode == 'own_account'">-->
+                                                <!--                                                    <input type="text" id="t_paid_id" name="t_paid_id"-->
+                                                <!--                                                           value="Employee (to reimburse)" readonly="1"-->
+                                                <!--                                                           style="width:210px;"/>-->
+                                                <!--                                                </t>-->
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <!-- submit button -->
+                                    <button id="submit" type="submit" class="btn btn-outline-secondary btn-block mt-3"
+                                            style="width:210px;">
+                                        Submit
+                                    </button>
+                                </div>
+                            </div>
+                        </t>
+                    </t>
+                </t>
+            </form>
+        </div>
     </template>
 
 </odoo>
