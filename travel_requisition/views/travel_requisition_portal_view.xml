@@ -135,50 +135,75 @@
                     </div>
                     <div class="container">
                         <div class="row justify-content-md-center">
-                            <div class="col-lg-3">
-                                <b>Employee Code</b>
-                                <br/>
-                                <b>Mobile No.</b>
-                                <br/>
-                                <b>Grade</b>
-                                <br/>
-                                <b>Cadre</b>
-                                <br/>
-                                <b>Grade Title</b>
-                                <br/>
-                            </div>
-                            <div class="col-lg-3">
-                                <t t-esc="expense.emp_code"/>
-                                <br/>
-                                <t t-esc="expense.mobile"/>
-                                <br/>
-                                <t t-esc="expense.t_grade.grade_new"/>
-                                <br/>
-                                <t t-esc="expense.t_cadre.cadre_new"/>
-                                <br/>
-                                <t t-esc="expense.t_grade_title.grade_title_line"/>
-                                <br/>
-                            </div>
-
-                            <div class="col-lg-3">
-                                <b>Company</b>
-                                <br/>
-                                <b>Department</b>
-                                <br/>
-                                <b>Designation</b>
-                                <br/>
-                                <b>Purpose of Visit</b>
-                                <br/>
-                            </div>
-                            <div class="col-lg-3">
-                                <t t-esc="expense.company_id.name"/>
-                                <br/>
-                                <t t-esc="expense.department"/>
-                                <br/>
-                                <t t-esc="expense.designation"/>
-                                <br/>
-                                <t t-esc="expense.purpose_of_visit"/>
-                                <br/>
+                            <div class="col">
+                                <table>
+                                    <tr>
+                                        <td style="width:330px;">
+                                            <b>Employee Code</b>
+                                        </td>
+                                        <td style="width:450px;">
+                                            <t t-esc="expense.emp_code"/>
+                                        </td>
+                                        <td style="width:330px;">
+                                            <b>Company</b>
+                                        </td>
+                                        <td style="width:450px;">
+                                            <t t-esc="expense.company_id.name"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <b>Mobile No.</b>
+                                        </td>
+                                        <td>
+                                            <t t-esc="expense.mobile"/>
+                                        </td>
+                                        <td>
+                                            <b>Department</b>
+                                        </td>
+                                        <td>
+                                            <t t-esc="expense.department"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <b>Grade</b>
+                                        </td>
+                                        <td>
+                                            <t t-esc="expense.t_grade.grade_new"/>
+                                        </td>
+                                        <td>
+                                            <b>Designation</b>
+                                        </td>
+                                        <td>
+                                            <t t-esc="expense.designation"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <b>Cadre</b>
+                                        </td>
+                                        <td>
+                                            <t t-esc="expense.t_cadre.cadre_new"/>
+                                        </td>
+                                        <td>
+                                            <b>Purpose of Visit</b>
+                                        </td>
+                                        <td>
+                                            <t t-esc="expense.purpose_of_visit"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <b>Grade Title</b>
+                                        </td>
+                                        <td>
+                                            <t t-esc="expense.t_grade_title.grade_title_line"/>
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                </table>
                             </div>
 
                             <div class="container">
@@ -302,6 +327,7 @@
                                     </tr>
                                 </table>
                             </div>
+
 
                             <div class="container">
                                 <div class="col">
@@ -487,7 +513,8 @@
                                             </td>
                                             <td>
                                                 <!-- getting products from Many 2 one field-->
-                                                <select id="t_product" name="t_product" style="width:210px;" required="1">
+                                                <select id="t_product" name="t_product" style="width:210px;"
+                                                        required="1">
                                                     <option></option>
                                                     <t t-foreach="t_product" t-as="tprod">
                                                         <option t-att-value="tprod.id">
@@ -631,6 +658,274 @@
                                             </td>
                                         </tr>
                                     </table>
+
+                                    <div class="col">
+                                        <h4>Travel Requisitions Info.</h4>
+                                        <hr/>
+                                        <div class="justify-content-md-center">
+                                            <table>
+                                                <tr>
+                                                    <td style="width:330px;">
+                                                        <b>Employee Code</b>
+                                                    </td>
+                                                    <td style="width:450px;">
+                                                        <input type="text" id="t_empcode" name="t_empcode"
+                                                               style="width:210px;"/>
+                                                    </td>
+                                                    <td style="width:330px;">
+                                                        <b>Company</b>
+                                                    </td>
+                                                    <td style="width:450px;">
+                                                        <input type="text" id="t_comp" name="t_comp"
+                                                               style="width:210px;"/>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <b>Mobile No.</b>
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" id="t_mob" name="t_mob"
+                                                               style="width:210px;"/>
+                                                    </td>
+                                                    <td>
+                                                        <b>Department</b>
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" id="t_department" name="t_department"
+                                                               style="width:210px;"/>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <b>Grade</b>
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" id="t_gr" name="t_gr"
+                                                               style="width:210px;"/>
+                                                    </td>
+                                                    <td>
+                                                        <b>Designation</b>
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" id="t_desig" name="t_desig"
+                                                               style="width:210px;"/>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <b>Cadre</b>
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" id="t_cad" name="t_cad"
+                                                               style="width:210px;"/>
+                                                    </td>
+                                                    <td>
+                                                        <b>Purpose of Visit</b>
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" id="t_purpose" name="t_purpose"
+                                                               style="width:210px;"/>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <b>Grade Title</b>
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" id="t_grat" name="t_grat"
+                                                               style="width:210px;"/>
+                                                    </td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <br/>
+                                    <div class="col">
+                                        <table border="1">
+                                            <br/>
+                                            <h5>Travel Details</h5>
+                                            <hr/>
+                                            <tr>
+                                                <td>
+                                                    <b>Date</b>
+                                                </td>
+                                                <td>
+                                                    <b>From</b>
+                                                </td>
+                                                <td>
+                                                    <b>Departs Time</b>
+                                                </td>
+                                                <td>
+                                                    <b>To</b>
+                                                </td>
+                                                <td>
+                                                    <b>Arrives Time</b>
+                                                </td>
+                                                <td>
+                                                    <b>Mode &amp; Class</b>
+                                                </td>
+                                            </tr>
+
+                                            <!-- using foreach loop show the one to many data -->
+                                            <!--                                                        <t t-foreach="expense.travel_detail_line_ids" t-as="travelline">-->
+                                            <tr>
+                                                <td>
+                                                    <input type="date" id="t_date" name="t_date"/>
+                                                </td>
+                                                <td>
+                                                    <input type="date" id="t_from" name="t_from"/>
+                                                </td>
+                                                <td>
+                                                    <input type="time" id="t_depart_time" name="t_depart_time"/>
+                                                </td>
+                                                <td>
+                                                    <input type="date" id="t_to" name="t_to"/>
+                                                </td>
+                                                <td>
+                                                    <input type="time" id="t_arrive_time" name="t_arrive_time"/>
+                                                </td>
+                                                <td>
+                                                    <input type="text" id="t_mode_class" name="t_mode_class"/>
+                                                </td>
+                                            </tr>
+                                            <!--                                                        </t>-->
+                                        </table>
+                                    </div>
+
+                                    <div class="col">
+                                        <br/>
+                                        <table>
+                                            <h5>In Case of Train Booking</h5>
+                                            <hr/>
+                                            <tr>
+                                                <td style="width:70%;">
+                                                    <b>Pan Card Number</b>
+                                                </td>
+                                                <td>
+                                                    <input type="text" id="t_pan_card" name="t_pan_card"
+                                                           style="width:210px;"/>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <b>Driving License Number</b>
+                                                </td>
+                                                <td>
+                                                    <input type="text" id="t_driving_li" name="t_driving_li"
+                                                           style="width:210px;"/>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <b>Age</b>
+                                                </td>
+                                                <td>
+                                                    <input type="text" id="t_age" name="t_age"
+                                                           style="width:210px;"/>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+
+                                    <div class="col">
+                                        <br/>
+                                        <table>
+                                            <h5>In Case of International Travel</h5>
+                                            <hr/>
+                                            <tr>
+                                                <td style="width:70%;">
+                                                    <b>Name on Passport</b>
+                                                </td>
+                                                <td>
+                                                    <input type="text" id="t_passport_name"
+                                                           name="t_passport_name"
+                                                           style="width:210px;"/>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <b>Passport No.</b>
+                                                </td>
+                                                <td>
+                                                    <input type="text" id="t_pass_no" name="t_pass_no"
+                                                           style="width:210px;"/>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <b>Date &amp; Place of Issue</b>
+                                                </td>
+                                                <td>
+                                                    <div class="o_row">
+                                                        <input type="text" id="t_place_issue"
+                                                               name="t_place_issue"
+                                                               style="width:210px;"/>
+                                                        <input type="text" id="t_date_issue" name="t_date_issue"
+                                                               style="width:210px;"/>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+
+                                    <div class="container">
+                                        <div class="col">
+                                            <table style="width:100%" border="1">
+                                                <br/>
+                                                <h5>Stay Details</h5>
+                                                <hr/>
+                                                <tr>
+                                                    <td>
+                                                        <b>Name</b>
+                                                    </td>
+                                                    <td>
+                                                        <b>Hotel / Guest House</b>
+                                                    </td>
+                                                    <td>
+                                                        <b>Location</b>
+                                                    </td>
+                                                    <td>
+                                                        <b>Check In Date</b>
+                                                    </td>
+                                                    <td>
+                                                        <b>Check out Date</b>
+                                                    </td>
+                                                </tr>
+
+                                                <!-- using foreach loop show the one to many data -->
+                                                <!--                                                        <t t-foreach="expense.stay_detail_line_ids" t-as="stayline">-->
+                                                <tr>
+                                                    <td>
+                                                        <input type="text" id="t_stay_name" name="t_stay_name"
+                                                               style="width:210px;"/>
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" id="t_hotelguest" name="t_hotelguest"
+                                                               style="width:210px;"/>
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" id="t_location" name="t_location"
+                                                               style="width:210px;"/>
+                                                    </td>
+                                                    <td>
+                                                        <input type="date" id="t_checkin_date"
+                                                               name="t_checkin_date"
+                                                               style="width:210px;"/>
+                                                    </td>
+                                                    <td>
+                                                        <input type="date" id="t_checkout_date"
+                                                               name="t_checkout_date"
+                                                               style="width:210px;"/>
+                                                    </td>
+                                                </tr>
+                                                <!--                                                        </t>-->
+                                            </table>
+                                        </div>
+                                        <br/>
+                                    </div>
                                     <!-- submit button -->
                                     <button id="submit" type="submit" class="btn btn-outline-secondary btn-block mt-3"
                                             style="width:210px;">
